@@ -124,6 +124,14 @@ public class Betweenle {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public String obtenerEstado() {
+        return "[ " + estadoActual.getLimiteAbajo().toUpperCase()
+                + " ] palabra sin encontrar [ "
+                + estadoActual.getLimiteArriba().toUpperCase()
+                + " ] , Intentos restantes : "
+                + estadoActual.getIntentosRestantes();
+    }
+
     public int obtenerLongitudPorDificultad(String dificultad) {
         if (dificultad.equals("facil")) {
             return 5;
