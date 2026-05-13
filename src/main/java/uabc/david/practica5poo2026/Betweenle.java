@@ -25,6 +25,10 @@ public class Betweenle {
         return letrasDificil;
     }
 
+    public boolean partidaActida() {
+        return partidaActiva;
+    }
+
     public boolean iniciarPartida(String idioma, String dificultad) {
         diccionario = new Diccionario(idioma);
 
@@ -45,11 +49,23 @@ public class Betweenle {
     }
 
     public int obtenerLongitudPorDificultad(String dificultad) {
-        return 0;
+        if (dificultad.equals("facil")) {
+            return 5;
+        }
+        if (dificultad.equals("intermedio")) {
+            return 6;
+        }
+        return letrasDificil;
     }
 
     public int obtenerIntentosPorDificultad(String dificultad) {
-        return 0;
+        if (dificultad.equals("facil")) {
+            return 10;
+        }
+        if (dificultad.equals("intermedio")) {
+            return 12;
+        }
+        return 14;
     }
 
 }
