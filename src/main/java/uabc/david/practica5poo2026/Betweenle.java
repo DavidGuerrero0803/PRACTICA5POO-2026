@@ -28,7 +28,7 @@ public class Betweenle {
         return letrasDificil;
     }
 
-    public boolean partidaActida() {
+    public boolean partidaActiva() {
         return partidaActiva;
     }
 

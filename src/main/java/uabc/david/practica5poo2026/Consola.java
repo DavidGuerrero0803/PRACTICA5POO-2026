@@ -1,5 +1,6 @@
 package uabc.david.practica5poo2026;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Consola {
@@ -81,8 +82,69 @@ public class Consola {
     }
 
 
-    public void ejecutarPartida() {
+    private void ejecutarPartida() {
+        int numeroIntento = 1;
 
+        while (juego.juegoActivo()) {
+            System.out.println("\n-------------------------------------------------");
+            System.out.println(juego.obtenerEstado());
+            System.out.println("-------------------------------------------------");
+
+            mostrarHistorial(numeroIntento);
+            mostrarLetrasUsadas();
+
+            System.out.println("\nOpciones:");
+            System.out.println("[1] Escribir una palabra");
+            System.out.println("[2] Pedir pista");
+            int accion = leerOpcion("Elige una opción: ", 1, 2);
+
+            if (accion == 2) {
+                gestionarPista();
+                continue;
+            }
+
+            String intento = leerEntrada("Escribe tu palabra: ");
+            String resultado = juego.procesarIntento(intento);
+
+            if (resultado.equals("longitud")) {
+                System.out.println("La palabra debe tener " +
+                        juego.getEstadoActual().getLongitudPalabra() + " letras. Intenta de nuevo.");
+                continue;
+            }
+
+            if (resultado.equals("no encontrada")) {
+                continue;
+            }
+
+            if (resultado.equals("sin intentos")) {
+                System.out.println("No te quedan intentos disponibles.");
+                break;
+            }
+
+            if (resultado.equals("correcto")) {
+                mostrarHistorial(numeroIntento + 1);
+                System.out.println("\nGANASTE!");
+                System.out.println("La palabra era: " + intento.toUpperCase());
+                return;
+            }
+
+            if (resultado.equals("antes")) {
+                System.out.println("La palabra secreta está ANTES de " + intento + " alfabéticamente.");
+            } else if (resultado.equals("despues")) {
+                System.out.println("La palabra secreta está DESPUÉS de " + intento + " alfabéticamente.");
+            }
+
+            numeroIntento++;
+        }
+
+        System.out.println("\n SE ACABARON LOS INTENTOS");
+        System.out.println("La palabra era: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
+
+    }
+
+    private String leerEntrada(String mensaje) {
+        System.out.print(mensaje);
+        return scanner.nextLine().trim().toLowerCase();
     }
 
     public void mostrarHistorial() {
