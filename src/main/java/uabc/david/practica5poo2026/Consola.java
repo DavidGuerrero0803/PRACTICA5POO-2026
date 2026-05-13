@@ -177,8 +177,20 @@ public class Consola {
         System.out.println();
     }
 
-    public void gestionarPista() {
+    private void gestionarPista() {
+        if (juego.getEstadoActual().pistaUtilizada()) {
+            System.out.println("Ya usaste tu pista en esta partida.");
+            return;
+        }
 
+        System.out.println("\nElige tu pista (solo puedes usar 1 por partida):");
+        System.out.println("1. Acercar el límite superior a la palabra secreta");
+        System.out.println("2. Acercar el límite inferior a la palabra secreta");
+        System.out.println("3. Revelar la letra inicial de la palabra secreta");
+        int opcionPista = leerOpcion("Elige una opción: ", 1, 3);
+
+        String resultadoPista = juego.pedirPista(opcionPista);
+        System.out.println("Pista: " + resultadoPista);
     }
 
     public static void main(String[] args) {
