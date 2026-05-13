@@ -72,6 +72,18 @@ public class Betweenle {
         return resultado;
     }
 
+    public boolean verificarPalabra(String palabra) {
+        return diccionario.existeLaPalabra(palabra);
+    }
+
+    public void agregarPalabraAlDiccionario(String palabra) {
+        diccionario.agregarPalabra(palabra);
+    }
+
+    public boolean juegoActivo() {
+        return partidaActiva;
+    }
+
     public int obtenerLongitudPorDificultad(String dificultad) {
         if (dificultad.equals("facil")) {
             return 5;
