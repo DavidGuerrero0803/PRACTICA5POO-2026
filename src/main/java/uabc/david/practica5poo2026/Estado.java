@@ -53,8 +53,8 @@ public class Estado {
     }
 
     public double calcularProximidad(String intento) {
-        double valorAbajo   = palabraAValor(limiteAbajo);
-        double valorArriba  = palabraAValor(limiteArriba);
+        double valorAbajo = palabraAValor(limiteAbajo);
+        double valorArriba = palabraAValor(limiteArriba);
         double valorIntento = palabraAValor(intento);
         double valorSecreta = palabraAValor(palabraSecreta);
 
@@ -90,15 +90,36 @@ public class Estado {
     }
 
     public String pistaMoverArriba() {
-        return null;
+        pistaUtilizada = true;
+        limiteArriba = interpolarLimite(limiteArriba, palabraSecreta, 0.10);
+        return limiteArriba;
     }
 
     public String pistaMoverAbajo() {
-        return null;
+        pistaUtilizada = true;
+        limiteAbajo = interpolarLimite(limiteAbajo, palabraSecreta, 0.10);
+        return limiteAbajo;
     }
 
     public String pistaLetraInicial() {
-        return null;
+        pistaUtilizada = true;
+        return String.valueOf(palabraSecreta.charAt(0));
+    }
+
+    private String interpolarLimite(String desde, String hacia, double porcentaje) {
+        StringBuilder resultado = new StringBuilder();
+        int longitud = Math.min(desde.length(), hacia.length());
+
+        for (int i = 0; i < longitud; i++) {
+            int charDesde = (int) desde.charAt(i);
+            int charHacia = (int) hacia.charAt(i);
+            int charNuevo = charDesde + (int) ((charHacia - charDesde) * porcentaje);
+
+            charNuevo = Math.max('a', Math.min('z', charNuevo));
+            resultado.append((char) charNuevo);
+        }
+
+        return resultado.toString();
     }
 
     public HashSet<String> getLetrasUsadas() {
