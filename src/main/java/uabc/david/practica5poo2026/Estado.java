@@ -126,7 +126,7 @@ public class Estado {
         return letrasUsadas;
     }
 
-    public ArrayList<String> getHistorialIntentos() {
+    public ArrayList<String> getHistorial() {
         return historialIntentos;
     }
 

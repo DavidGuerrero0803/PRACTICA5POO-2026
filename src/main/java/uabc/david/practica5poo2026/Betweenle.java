@@ -1,5 +1,8 @@
 package uabc.david.practica5poo2026;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public class Betweenle {
     private Diccionario diccionario;
     private Estado estadoActual;
@@ -90,7 +93,7 @@ public class Betweenle {
         }
 
         if (opcionPista == 1) {
-            String nuevoLimite = estadoActual.pistaMoverAbajo();
+            String nuevoLimite = estadoActual.pistaMoverArriba();
             return "El límite superior ahora es: " + nuevoLimite;
         }
 
@@ -105,6 +108,20 @@ public class Betweenle {
         }
 
         return "opción inválida";
+    }
+
+    public ArrayList<String> obtenerHistorial() {
+        return estadoActual.getHistorial()
+                .stream()
+                .map(entrada -> {
+                    String[] partes = entrada.split("\\|");
+                    String palabra = partes[0];
+                    String resultado = partes[1];
+                    String proximidad = partes[2];
+                    return palabra + " - " + resultado.toUpperCase() + " (" +
+                            proximidad + "% de proximidad)";
+                })
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public int obtenerLongitudPorDificultad(String dificultad) {
