@@ -114,6 +114,7 @@ public class Consola {
             }
 
             if (resultado.equals("no encontrada")) {
+                manejarPalabraNoEncontrada(intento);
                 continue;
             }
 
@@ -191,6 +192,19 @@ public class Consola {
 
         String resultadoPista = juego.pedirPista(opcionPista);
         System.out.println("Pista: " + resultadoPista);
+    }
+
+    private void manejarPalabraNoEncontrada(String palabra) {
+        System.out.println("La palabra " + palabra + " no está en el diccionario.");
+        System.out.println("¿Puedes demostrar que es una palabra válida?");
+        System.out.println("1. Sí, agregarla al diccionario");
+        System.out.println("2. No, escribir otra palabra");
+        int opcion = leerOpcion("Elige una opción: ", 1, 2);
+
+        if (opcion == 1) {
+            juego.agregarPalabraAlDiccionario(palabra);
+            System.out.println("La palabra " + palabra + " fue agregada al diccionario.");
+        }
     }
 
     public static void main(String[] args) {
