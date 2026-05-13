@@ -147,8 +147,19 @@ public class Consola {
         return scanner.nextLine().trim().toLowerCase();
     }
 
-    public void mostrarHistorial() {
+    private void mostrarHistorial(int totalIntentos) {
+        ArrayList<String> historial = juego.obtenerHistorial();
+        if (historial.isEmpty()) {
+            System.out.println("\nNo se ha escrito ninguna palabra");
+            return;
+        }
 
+        System.out.println("\nHistorial de intentos:");
+        int numero = 1;
+        for (String linea : historial) {
+            System.out.println("  " + numero + ". " + linea);
+            numero++;
+        }
     }
 
     public void mostrarLetrasUsadas() {
