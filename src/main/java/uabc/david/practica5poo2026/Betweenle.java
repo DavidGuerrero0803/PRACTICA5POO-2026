@@ -48,6 +48,30 @@ public class Betweenle {
         return true;
     }
 
+    public String procesarIntento(String intento) {
+        String palabraIngresada = intento.trim().toLowerCase();
+
+        if (!estadoActual.tieneIntentos()) {
+            return "sin intentos";
+        }
+
+        if (palabraIngresada.length() != estadoActual.getLongitudPalabra()) {
+            return "longitud";
+        }
+
+        if (!diccionario.existeLaPalabra(palabraIngresada)) {
+            return "no encontrada";
+        }
+
+        String resultado = estadoActual.procesarIntento(palabraIngresada);
+
+        if (resultado.equals("correcto") || !estadoActual.tieneIntentos()) {
+            partidaActiva = false;
+        }
+
+        return resultado;
+    }
+
     public int obtenerLongitudPorDificultad(String dificultad) {
         if (dificultad.equals("facil")) {
             return 5;
