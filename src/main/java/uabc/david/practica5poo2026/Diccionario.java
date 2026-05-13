@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Diccionario {
-    private HashMap<String, String> palabras;
+    private HashMap<String, Integer> palabras;
     private String idioma;
 
     public Diccionario(String idioma) {
@@ -32,7 +32,7 @@ public class Diccionario {
             while ((linea = lector.readLine()) != null) {
                 String palabra = linea.trim().toLowerCase();
                 if (!palabra.isEmpty()) {
-                    palabras.put(palabra, "");
+                    palabras.put(palabra, palabra.length());
                 }
             }
             lector.close();
@@ -41,8 +41,9 @@ public class Diccionario {
         }
     }
 
-    public void agregarPalabra(String palabra, String definicion) {
-        palabras.put(palabra.toLowerCase(), definicion);
+    public void agregarPalabra(String palabra) {
+        String palabraAgregada = palabra.toLowerCase();
+        palabras.put(palabraAgregada, palabraAgregada.length());
     }
 
     public boolean existeLaPalabra(String palabra) {
