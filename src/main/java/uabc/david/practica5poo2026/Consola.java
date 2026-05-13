@@ -1,6 +1,7 @@
 package uabc.david.practica5poo2026;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Consola {
@@ -162,8 +163,18 @@ public class Consola {
         }
     }
 
-    public void mostrarLetrasUsadas() {
+    private void mostrarLetrasUsadas() {
+        Iterator<String> iterador = juego.getEstadoActual().getLetrasUsadas().iterator();
 
+        if (!iterador.hasNext()) {
+            return;
+        }
+
+        System.out.print("Letras utilizadas: ");
+        while (iterador.hasNext()) {
+            System.out.print(iterador.next().toUpperCase() + " ");
+        }
+        System.out.println();
     }
 
     public void gestionarPista() {
