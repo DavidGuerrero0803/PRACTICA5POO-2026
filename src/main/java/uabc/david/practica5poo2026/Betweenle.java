@@ -84,6 +84,29 @@ public class Betweenle {
         return partidaActiva;
     }
 
+    public String pedirPista(int opcionPista) {
+        if (estadoActual.pistaUtilizada()) {
+            return "pista utilizada";
+        }
+
+        if (opcionPista == 1) {
+            String nuevoLimite = estadoActual.pistaMoverAbajo();
+            return "El límite superior ahora es: " + nuevoLimite;
+        }
+
+        if (opcionPista == 2) {
+            String nuevoLimite = estadoActual.pistaMoverAbajo();
+            return "El límite superior ahora es: " + nuevoLimite;
+        }
+
+        if (opcionPista == 3) {
+            String letra = estadoActual.pistaLetraInicial();
+            return "La palabra empieza con la letra: " + letra.toUpperCase();
+        }
+
+        return "opción inválida";
+    }
+
     public int obtenerLongitudPorDificultad(String dificultad) {
         if (dificultad.equals("facil")) {
             return 5;
