@@ -27,11 +27,66 @@ public class Estado {
     }
 
     public String procesarIntento(String intento) {
-        return null;
+        intentosRestantes--;
+
+        for (int i = 0; i < intento.length(); i++) {
+            letrasUsadas.add(String.valueOf(intento.charAt(i)));
+        }
+
+        String resultado;
+        int comparacion = intento.compareTo(palabraSecreta);
+
+        if (comparacion == 0) {
+            resultado = "correcto";
+        } else if (comparacion > 0) {
+            resultado = "antes";
+            limiteArriba = intento;
+        } else {
+            resultado = "despues";
+            limiteAbajo = intento;
+        }
+
+        double proximidad = calcularProximidad(intento);
+        historialIntentos.add(intento + "," + resultado + "," + proximidad);
+
+        return resultado;
     }
 
     public double calcularProximidad(String intento) {
-        return 0.0;
+        double valorAbajo   = palabraAValor(limiteAbajo);
+        double valorArriba  = palabraAValor(limiteArriba);
+        double valorIntento = palabraAValor(intento);
+        double valorSecreta = palabraAValor(palabraSecreta);
+
+        double rango = valorArriba - valorAbajo;
+        if (rango == 0) {
+            return 100.0;
+        }
+
+        double distancia = Math.abs(valorIntento - valorSecreta);
+        double proximidad = (1.0 - (distancia / rango)) * 100.0;
+
+        if (proximidad < 0.0) {
+            return 0.0;
+        }
+        if (proximidad > 100.0) {
+            return 100.0;
+        }
+
+        return Math.round(proximidad * 10.0) / 10.0;
+    }
+
+    private double palabraAValor(String palabra) {
+        double valor = 0;
+        int limite = Math.min(palabra.length(), 4);
+        for (int i = 0; i < limite; i++) {
+            valor += (double) palabra.charAt(i) / Math.pow(100, i);
+        }
+        return valor;
+    }
+
+    public boolean tieneIntentos() {
+        return intentosRestantes > 0;
     }
 
     public String pistaMoverArriba() {
@@ -44,10 +99,6 @@ public class Estado {
 
     public String pistaLetraInicial() {
         return null;
-    }
-
-    public boolean tieneIntentos() {
-        return false;
     }
 
     public HashSet<String> getLetrasUsadas() {
