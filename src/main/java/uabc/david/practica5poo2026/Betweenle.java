@@ -33,10 +33,14 @@ public class Betweenle {
     }
 
     public boolean iniciarPartida(String idioma, String dificultad) {
-        diccionario = new Diccionario(idioma);
 
-        String rutaArchivo = idioma.equals("español") ? "src/main/java/uabc/david/practica5poo2026/espanol.txt" : "src/main/java/uabc/david/practica5poo2026/ingles.txt";
-        diccionario.cargarDesdeArchivo(rutaArchivo);
+        if (this.diccionario == null || !this.diccionario.getIdioma().equals(idioma)) {
+            this.diccionario = new Diccionario(idioma);
+            String rutaArchivo = idioma.equals("español") ?
+                    "src/main/java/uabc/david/practica5poo2026/espanol.txt" :
+                    "src/main/java/uabc/david/practica5poo2026/ingles.txt";
+            this.diccionario.cargarDesdeArchivo(rutaArchivo);
+        }
 
         int longitud = obtenerLongitudPorDificultad(dificultad);
         int intentos = obtenerIntentosPorDificultad(dificultad);
@@ -125,10 +129,10 @@ public class Betweenle {
     }
 
     public String obtenerEstado() {
-        return "[ " + estadoActual.getLimiteAbajo().toUpperCase()
-                + " ] palabra sin encontrar [ "
+        return "    [ " + estadoActual.getLimiteAbajo().toUpperCase()
+                + " ]\n PALABRA SECRETA \n    [ "
                 + estadoActual.getLimiteArriba().toUpperCase()
-                + " ] , Intentos restantes : "
+                + " ]\nIntentos restantes : "
                 + estadoActual.getIntentosRestantes();
     }
 

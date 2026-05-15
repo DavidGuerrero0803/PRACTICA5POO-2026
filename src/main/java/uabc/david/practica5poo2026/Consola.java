@@ -56,8 +56,8 @@ public class Consola {
         int longitud = juego.obtenerLongitudPorDificultad(dificultad);
         int intentos = juego.obtenerIntentosPorDificultad(dificultad);
 
-        System.out.println("Suerte! Palabra de " + longitud +
-                " letras | " + intentos + " intentos disponibles.");
+        System.out.println("Es una palabra de " + longitud +
+                " letras, tienes " + intentos + " intentos disponibles.");
     }
 
     private int leerOpcion(String mensaje, int min, int max) {
@@ -87,9 +87,9 @@ public class Consola {
         int numeroIntento = 1;
 
         while (juego.juegoActivo()) {
-            System.out.println("\n-------------------------------------------------");
+            System.out.println("\n--------------------------");
             System.out.println(juego.obtenerEstado());
-            System.out.println("-------------------------------------------------");
+            System.out.println("--------------------------");
 
             mostrarHistorial(numeroIntento);
             mostrarLetrasUsadas();

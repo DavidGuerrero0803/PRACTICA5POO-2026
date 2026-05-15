@@ -78,9 +78,9 @@ public class Estado {
 
     private double palabraAValor(String palabra) {
         double valor = 0;
-        int limite = Math.min(palabra.length(), 4);
+        int limite = Math.min(palabra.length(), 10);
         for (int i = 0; i < limite; i++) {
-            valor += (double) palabra.charAt(i) / Math.pow(100, i);
+            valor += (double) palabra.charAt(i) / Math.pow(27, i);
         }
         return valor;
     }
@@ -91,13 +91,13 @@ public class Estado {
 
     public String pistaMoverArriba() {
         pistaUtilizada = true;
-        limiteArriba = interpolarLimite(limiteArriba, palabraSecreta, 0.10);
+        limiteArriba = interpolarLimite(limiteArriba, palabraSecreta, 0.01);
         return limiteArriba;
     }
 
     public String pistaMoverAbajo() {
         pistaUtilizada = true;
-        limiteAbajo = interpolarLimite(limiteAbajo, palabraSecreta, 0.10);
+        limiteAbajo = interpolarLimite(limiteAbajo, palabraSecreta, 0.01);
         return limiteAbajo;
     }
 
