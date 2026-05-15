@@ -35,7 +35,7 @@ public class Betweenle {
     public boolean iniciarPartida(String idioma, String dificultad) {
         diccionario = new Diccionario(idioma);
 
-        String rutaArchivo = idioma.equals("español") ? "espanol.txt" : "ingles.txt";
+        String rutaArchivo = idioma.equals("español") ? "src/main/java/uabc/david/practica5poo2026/espanol.txt" : "src/main/java/uabc/david/practica5poo2026/ingles.txt";
         diccionario.cargarDesdeArchivo(rutaArchivo);
 
         int longitud = obtenerLongitudPorDificultad(dificultad);
@@ -99,7 +99,7 @@ public class Betweenle {
 
         if (opcionPista == 2) {
             String nuevoLimite = estadoActual.pistaMoverAbajo();
-            return "El límite superior ahora es: " + nuevoLimite;
+            return "El límite inferior ahora es: " + nuevoLimite;
         }
 
         if (opcionPista == 3) {

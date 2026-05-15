@@ -47,7 +47,7 @@ public class Estado {
         }
 
         double proximidad = calcularProximidad(intento);
-        historialIntentos.add(intento + "," + resultado + "," + proximidad);
+        historialIntentos.add(intento + "|" + resultado + "|" + proximidad);
 
         return resultado;
     }
