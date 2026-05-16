@@ -14,7 +14,6 @@ public class Consola {
     }
 
     public void iniciar() {
-        System.out.println("BIENVENIDO A BETWEENLE");
         mostrarMenu();
         ejecutarPartida();
         scanner.close();
@@ -138,9 +137,13 @@ public class Consola {
 
             numeroIntento++;
         }
+        System.out.println("\n---------------------------------------------------");
+        System.out.println("               RESUMEN DE LA PARTIDA               ");
+        System.out.println("---------------------------------------------------");
+        mostrarHistorial(numeroIntento);
 
-        System.out.println("\n SE ACABARON LOS INTENTOS");
-        System.out.println("La palabra era: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
+        System.out.println("\nSE ACABARON LOS INTENTOS");
+        System.out.println("La palabra secreta era: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
 
     }
 

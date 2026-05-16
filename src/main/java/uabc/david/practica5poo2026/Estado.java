@@ -1,7 +1,10 @@
 package uabc.david.practica5poo2026;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import static java.text.Normalizer.normalize;
 
 public class Estado {
     private HashSet<String> letrasUsadas;
@@ -77,10 +80,13 @@ public class Estado {
     }
 
     private double palabraAValor(String palabra) {
+        String palabraNormalizada = normalize(palabra.toLowerCase(), Normalizer.Form.NFD)
+                .replaceAll("[^a-zñ]", "");
         double valor = 0;
-        int limite = Math.min(palabra.length(), 10);
-        for (int i = 0; i < limite; i++) {
-            valor += (double) palabra.charAt(i) / Math.pow(27, i);
+        int longitud = palabraNormalizada.length();
+        for (int i = 0; i < longitud; i++) {
+            int codigoLetra = palabraNormalizada.charAt(i) - 'a' + 1;
+            valor += (double) codigoLetra / Math.pow(30, i);
         }
         return valor;
     }
