@@ -119,8 +119,14 @@ public class Estado {
         for (int i = 0; i < longitud; i++) {
             int charDesde = (int) desde.charAt(i);
             int charHacia = (int) hacia.charAt(i);
-            int charNuevo = charDesde + (int) ((charHacia - charDesde) * porcentaje);
 
+            int avance = (int) ((charHacia - charDesde) * porcentaje);
+
+            if (avance == 0 && charDesde != charHacia) {
+                avance = (charHacia > charDesde) ? 1 : -1;
+            }
+
+            int charNuevo = charDesde + avance;
             charNuevo = Math.max('a', Math.min('z', charNuevo));
             resultado.append((char) charNuevo);
         }
