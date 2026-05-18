@@ -32,6 +32,42 @@ public class ProcesadorRonda {
         this.palabrasOrdenadas = palabrasOrdenadas;
     }
 
+    public HashSet<String> getLetrasUsadas() {
+        return letrasUsadas;
+    }
+
+    public ArrayList<String> getHistorial() {
+        return historialIntentos;
+    }
+
+    public String getLimiteArriba() {
+        return limiteArriba;
+    }
+
+    public double getProximidadLimiteArriba() {
+        return calcularProximidadLimite(limiteArriba);
+    }
+
+    public String getLimiteAbajo() {
+        return limiteAbajo;
+    }
+
+    public double getProximidadLimiteAbajo() {
+        return calcularProximidadLimite(limiteAbajo);
+    }
+
+    public String getPalabraSecreta() {
+        return palabraSecreta;
+    }
+
+    public int getIntentosRestantes() {
+        return intentosRestantes;
+    }
+
+    public int getLongitudPalabra() {
+        return longitudPalabra;
+    }
+
     public String procesarIntento(String intento) {
         intentosRestantes--;
 
@@ -93,32 +129,16 @@ public class ProcesadorRonda {
         return Math.round(distanciaPorcentaje * 100.0) / 100.0;
     }
 
-    private double palabraAValor(String palabra) {
-        String palabraNormalizada = normalize(palabra.toLowerCase(), Normalizer.Form.NFD)
-                .replaceAll("[^a-zñ]", "");
-        double valor = 0;
-        int longitud = palabraNormalizada.length();
-        for (int i = 0; i < longitud; i++) {
-            int codigoLetra = palabraNormalizada.charAt(i) - 'a' + 1;
-            valor += (double) codigoLetra / Math.pow(30, i);
-        }
-        return valor;
-    }
-
-    public double getProximidadLimiteArriba() {
-        return calcularProximidadLimite(limiteArriba);
-    }
-
-    public double getProximidadLimiteAbajo() {
-        return calcularProximidadLimite(limiteAbajo);
-    }
-
     public boolean estaEnRango(String intento) {
         return intento.compareTo(limiteAbajo) > 0 && intento.compareTo(limiteArriba) < 0;
     }
 
     public boolean tieneIntentos() {
         return intentosRestantes > 0;
+    }
+
+    public boolean pistaUtilizada() {
+        return pistaUtilizada;
     }
 
     public String pistaMoverArriba() {
@@ -180,60 +200,6 @@ public class ProcesadorRonda {
     public String pistaLetraInicial() {
         pistaUtilizada = true;
         return String.valueOf(palabraSecreta.charAt(0));
-    }
-
-    private String interpolarLimite(String desde, String hacia, double porcentaje) {
-        StringBuilder resultado = new StringBuilder();
-        int longitud = Math.min(desde.length(), hacia.length());
-
-        for (int i = 0; i < longitud; i++) {
-            int charDesde = (int) desde.charAt(i);
-            int charHacia = (int) hacia.charAt(i);
-
-            int avance = (int) ((charHacia - charDesde) * porcentaje);
-
-            if (avance == 0 && charDesde != charHacia) {
-                avance = (charHacia > charDesde) ? 1 : -1;
-            }
-
-            int charNuevo = charDesde + avance;
-            charNuevo = Math.max('a', Math.min('z', charNuevo));
-            resultado.append((char) charNuevo);
-        }
-
-        return resultado.toString();
-    }
-
-    public HashSet<String> getLetrasUsadas() {
-        return letrasUsadas;
-    }
-
-    public ArrayList<String> getHistorial() {
-        return historialIntentos;
-    }
-
-    public String getLimiteAbajo() {
-        return limiteAbajo;
-    }
-
-    public String getLimiteArriba() {
-        return limiteArriba;
-    }
-
-    public String getPalabraSecreta() {
-        return palabraSecreta;
-    }
-
-    public int getIntentosRestantes() {
-        return intentosRestantes;
-    }
-
-    public int getLongitudPalabra() {
-        return longitudPalabra;
-    }
-
-    public boolean pistaUtilizada() {
-        return pistaUtilizada;
     }
 
 }

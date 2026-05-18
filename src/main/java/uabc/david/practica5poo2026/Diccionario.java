@@ -16,6 +16,10 @@ public class Diccionario {
         this.palabras = new HashMap<>();
     }
 
+    public String getIdioma() {
+        return idioma;
+    }
+
     public void cargarArchivo(String archivoTexto) {
         this.rutaArchivo = archivoTexto;
         try {
@@ -75,10 +79,6 @@ public class Diccionario {
                 .map(HashMap.Entry::getKey)
                 .sorted()
                 .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public String getIdioma() {
-        return idioma;
     }
 
 }
