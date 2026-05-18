@@ -105,6 +105,18 @@ public class ProcesadorRonda {
         return valor;
     }
 
+    public double getProximidadLimiteArriba() {
+        return calcularProximidadLimite(limiteArriba);
+    }
+
+    public double getProximidadLimiteAbajo() {
+        return calcularProximidadLimite(limiteAbajo);
+    }
+
+    public boolean estaEnRango(String intento) {
+        return intento.compareTo(limiteAbajo) > 0 && intento.compareTo(limiteArriba) < 0;
+    }
+
     public boolean tieneIntentos() {
         return intentosRestantes > 0;
     }
