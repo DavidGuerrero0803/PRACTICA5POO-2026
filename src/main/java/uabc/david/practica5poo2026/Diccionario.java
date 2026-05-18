@@ -68,6 +68,15 @@ public class Diccionario {
         return filtradas.get(aleatorio.nextInt(filtradas.size()));
     }
 
+    public ArrayList<String> obtenerPalabrasOrdenadas(int longitud) {
+        return palabras.entrySet()
+                .stream()
+                .filter(entrada -> entrada.getValue() == longitud)
+                .map(HashMap.Entry::getKey)
+                .sorted()
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public String getIdioma() {
         return idioma;
     }
