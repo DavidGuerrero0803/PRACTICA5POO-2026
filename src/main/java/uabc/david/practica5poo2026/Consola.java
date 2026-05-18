@@ -81,7 +81,6 @@ public class Consola {
         return opcion;
     }
 
-
     private void ejecutarPartida() {
         int numeroIntento = 1;
 

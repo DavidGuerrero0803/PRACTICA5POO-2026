@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 import static java.text.Normalizer.normalize;
 
-public class Estado {
+public class ProcesadorRonda {
     private HashSet<String> letrasUsadas;
     private ArrayList<String> historialIntentos;
     private String dificultad;
@@ -17,7 +17,7 @@ public class Estado {
     private int longitudPalabra;
     private boolean pistaUtilizada;
 
-    public Estado(String palabraSecreta, int intentosMaximos, String dificultad) {
+    public ProcesadorRonda(String palabraSecreta, int intentosMaximos, String dificultad) {
         this.palabraSecreta = palabraSecreta;
         this.intentosRestantes = intentosMaximos;
         this.dificultad = dificultad;
@@ -142,10 +142,6 @@ public class Estado {
         return historialIntentos;
     }
 
-    public String getDificultad() {
-        return dificultad;
-    }
-
     public String getLimiteAbajo() {
         return limiteAbajo;
     }
@@ -164,42 +160,6 @@ public class Estado {
 
     public int getLongitudPalabra() {
         return longitudPalabra;
-    }
-
-    public void setLetrasUsadas(HashSet<String> letrasUsadas) {
-        this.letrasUsadas = letrasUsadas;
-    }
-
-    public void setHistorialIntentos(ArrayList<String> historialIntentos) {
-        this.historialIntentos = historialIntentos;
-    }
-
-    public void setDificultad(String dificultad) {
-        this.dificultad = dificultad;
-    }
-
-    public void setLimiteAbajo(String limiteAbajo) {
-        this.limiteAbajo = limiteAbajo;
-    }
-
-    public void setLimiteArriba(String limiteArriba) {
-        this.limiteArriba = limiteArriba;
-    }
-
-    public void setPalabraSecreta(String palabraSecreta) {
-        this.palabraSecreta = palabraSecreta;
-    }
-
-    public void setIntentosRestantes(int intentosRestantes) {
-        this.intentosRestantes = intentosRestantes;
-    }
-
-    public void setLongitudPalabra(int longitudPalabra) {
-        this.longitudPalabra = longitudPalabra;
-    }
-
-    public void setPistaUtilizada(boolean pistaUtilizada) {
-        this.pistaUtilizada = pistaUtilizada;
     }
 
     public boolean pistaUtilizada() {

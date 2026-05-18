@@ -17,14 +17,6 @@ public class Diccionario {
         this.palabras = new HashMap<>();
     }
 
-    public String getIdioma() {
-        return idioma;
-    }
-
-    public int getPalabrasTotales() {
-        return palabras.size();
-    }
-
     public void cargarDesdeArchivo(String rutaArchivo) {
         try {
             BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
@@ -41,13 +33,13 @@ public class Diccionario {
         }
     }
 
+    public boolean existeLaPalabra(String palabra) {
+        return palabras.containsKey(palabra.toLowerCase());
+    }
+
     public void agregarPalabra(String palabra) {
         String palabraAgregada = palabra.toLowerCase();
         palabras.put(palabraAgregada, palabraAgregada.length());
-    }
-
-    public boolean existeLaPalabra(String palabra) {
-        return palabras.containsKey(palabra.toLowerCase());
     }
 
     public String obtenerPalabraAleatoria(int longitud) {
@@ -64,4 +56,9 @@ public class Diccionario {
         Random aleatorio = new Random();
         return filtradas.get(aleatorio.nextInt(filtradas.size()));
     }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
 }

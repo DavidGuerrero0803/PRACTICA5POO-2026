@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Betweenle {
     private Diccionario diccionario;
-    private Estado estadoActual;
+    private ProcesadorRonda estadoActual;
     private int letrasDificil;
     private boolean partidaActiva;
 
@@ -14,22 +14,6 @@ public class Betweenle {
         this.diccionario = null;
         this.estadoActual = null;
         this.partidaActiva = false;
-    }
-
-    public Diccionario getDiccionario() {
-        return diccionario;
-    }
-
-    public Estado getEstadoActual() {
-        return estadoActual;
-    }
-
-    public int getLetrasDificil() {
-        return letrasDificil;
-    }
-
-    public boolean partidaActiva() {
-        return partidaActiva;
     }
 
     public boolean iniciarPartida(String idioma, String dificultad) {
@@ -50,9 +34,13 @@ public class Betweenle {
             return false;
         }
 
-        estadoActual = new Estado(palabraSecreta, intentos, dificultad);
+        estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad);
         partidaActiva = true;
         return true;
+    }
+
+    public ProcesadorRonda getEstadoActual() {
+        return estadoActual;
     }
 
     public String procesarIntento(String intento) {
@@ -77,10 +65,6 @@ public class Betweenle {
         }
 
         return resultado;
-    }
-
-    public boolean verificarPalabra(String palabra) {
-        return diccionario.existeLaPalabra(palabra);
     }
 
     public void agregarPalabraAlDiccionario(String palabra) {
