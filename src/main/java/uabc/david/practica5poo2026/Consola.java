@@ -61,9 +61,7 @@ public class Consola {
 
         System.out.println("\nCargando diccionario...");
 
-        int intentos = juego.getIntentosDificultad(dificultad);
-
-        boolean iniciado = juego.iniciarPartidaModoPrueba(idioma, dificultad, intentos, "CHASE");
+        boolean iniciado = juego.iniciarPartida(idioma, dificultad, intentosElegidos);
 
         if (!iniciado) {
             System.out.println("No se encontraron palabras de esa longitud en el diccionario.");
@@ -140,9 +138,9 @@ public class Consola {
                 System.out.println("\nLa palabra " + intento.toUpperCase()
                         + " está fuera del rango válido.");
                 System.out.println("Ingresa una palabra que esté alfabéticamente entre ["
-                        + juego.getEstadoActual().getLimiteSuperior().toUpperCase()
+                        + juego.getEstadoActual().getLimiteAbajo().toUpperCase()
                         + "] y ["
-                        + juego.getEstadoActual().getLimiteInferior().toUpperCase()
+                        + juego.getEstadoActual().getLimiteArriba().toUpperCase()
                         + "].");
                 continue;
             }

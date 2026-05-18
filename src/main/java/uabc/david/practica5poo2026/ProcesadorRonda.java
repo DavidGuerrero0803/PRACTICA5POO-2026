@@ -9,8 +9,8 @@ public class ProcesadorRonda {
     private ArrayList<String> palabrasOrdenadas;
     private HashSet<String> letrasUsadas;
     private String dificultad;
-    private String limiteSuperior;
-    private String limiteInferior;
+    private String limiteAbajo;
+    private String limiteArriba;
     private String palabraSecreta;
     private int intentosRestantes;
     private int longitudPalabra;
@@ -24,8 +24,8 @@ public class ProcesadorRonda {
         this.letrasUsadas = new HashSet<>();
         this.historialIntentos = new ArrayList<>();
         this.pistaUtilizada = false;
-        this.limiteSuperior = "a".repeat(longitudPalabra);
-        this.limiteInferior = "z".repeat(longitudPalabra);
+        this.limiteAbajo = "a".repeat(longitudPalabra);
+        this.limiteArriba = "z".repeat(longitudPalabra);
         this.palabrasOrdenadas = palabrasOrdenadas;
     }
 
@@ -37,20 +37,20 @@ public class ProcesadorRonda {
         return historialIntentos;
     }
 
-    public String getLimiteSuperior() {
-        return limiteSuperior;
+    public String getLimiteArriba() {
+        return limiteArriba;
     }
 
-    public double getProximidadSuperior() {
-        return calcularProximidadLimite(limiteSuperior);
+    public double getProximidadLimiteArriba() {
+        return calcularProximidadLimite(limiteArriba);
     }
 
-    public String getLimiteInferior() {
-        return limiteInferior;
+    public String getLimiteAbajo() {
+        return limiteAbajo;
     }
 
-    public double getProximidadInferior() {
-        return calcularProximidadLimite(limiteInferior);
+    public double getProximidadLimiteAbajo() {
+        return calcularProximidadLimite(limiteAbajo);
     }
 
     public String getPalabraSecreta() {
@@ -79,10 +79,10 @@ public class ProcesadorRonda {
             resultado = "correcto";
         } else if (intentoComparado > 0) {
             resultado = "antes";
-            limiteInferior = intento;
+            limiteArriba = intento;
         } else {
             resultado = "despues";
-            limiteSuperior = intento;
+            limiteAbajo = intento;
         }
 
         double proximidad = calcularProximidad(intento);
@@ -127,7 +127,7 @@ public class ProcesadorRonda {
     }
 
     public boolean estaEnRango(String intento) {
-        return intento.compareTo(limiteSuperior) > 0 && intento.compareTo(limiteInferior) < 0;
+        return intento.compareTo(limiteAbajo) > 0 && intento.compareTo(limiteArriba) < 0;
     }
 
     public boolean tieneIntentos() {
@@ -138,11 +138,11 @@ public class ProcesadorRonda {
         return pistaUtilizada;
     }
 
-    public String recorrerPalabraArriba() {
+    public String pistaMoverArriba() {
         this.pistaUtilizada = true;
 
         int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());
-        int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limiteSuperior.toLowerCase());
+        int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limiteAbajo.toLowerCase());
 
         if (indiceSecreto < 0) {
             indiceSecreto = -(indiceSecreto + 1);
@@ -162,15 +162,15 @@ public class ProcesadorRonda {
         int nuevoIndice = indiceLimite + pasos;
         nuevoIndice = Math.max(0, Math.min(indiceSecreto, nuevoIndice));
 
-        this.limiteSuperior = palabrasOrdenadas.get(nuevoIndice);
-        return this.limiteSuperior;
+        this.limiteAbajo = palabrasOrdenadas.get(nuevoIndice);
+        return this.limiteAbajo;
     }
 
-    public String recorrerPalabraAbajo() {
+    public String pistaMoverAbajo() {
         this.pistaUtilizada = true;
 
         int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());
-        int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limiteInferior.toLowerCase());
+        int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limiteArriba.toLowerCase());
 
         if (indiceSecreto < 0) {
             indiceSecreto = -(indiceSecreto + 1);
@@ -190,8 +190,8 @@ public class ProcesadorRonda {
         int nuevoIndice = indiceLimite - pasos;
         nuevoIndice = Math.max(indiceSecreto, Math.min(palabrasOrdenadas.size() - 1, nuevoIndice));
 
-        this.limiteInferior = palabrasOrdenadas.get(nuevoIndice);
-        return this.limiteInferior;
+        this.limiteArriba = palabrasOrdenadas.get(nuevoIndice);
+        return this.limiteArriba;
     }
 
     public String pistaLetraInicial() {
