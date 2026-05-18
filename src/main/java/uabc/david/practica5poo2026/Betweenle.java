@@ -16,7 +16,7 @@ public class Betweenle {
         this.partidaActiva = false;
     }
 
-    public boolean iniciarPartida(String idioma, String dificultad) {
+    public boolean iniciarPartida(String idioma, String dificultad, int intentos) {
 
         if (this.diccionario == null || !this.diccionario.getIdioma().equals(idioma)) {
             this.diccionario = new Diccionario(idioma);
@@ -27,13 +27,13 @@ public class Betweenle {
         }
 
         int longitud = obtenerLongitudPorDificultad(dificultad);
-        int intentos = obtenerIntentosPorDificultad(dificultad);
 
         String palabraSecreta = diccionario.obtenerPalabraAleatoria(longitud);
         if (palabraSecreta == null) {
             return false;
         }
 
+        // Se usa directamente el valor recibido como parámetro
         estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad);
         partidaActiva = true;
         return true;

@@ -27,9 +27,9 @@ public class Consola {
         String idioma = opcionIdioma == 1 ? "español" : "ingles";
 
         System.out.println("\nSelecciona la dificultad:");
-        System.out.println("1. Fácil (5 letras, 10 intentos)");
-        System.out.println("2. Intermedio (6 letras, 12 intentos)");
-        System.out.println("3. Difícil (n letras, 14 intentos)");
+        System.out.println("1. Fácil   (5 letras)");
+        System.out.println("2. Intermedio (6 letras)");
+        System.out.println("3. Difícil (n letras)");
         int opcionDificultad = leerOpcion("Opción: ", 1, 3);
 
         String dificultad;
@@ -43,8 +43,25 @@ public class Consola {
             juego = new Betweenle(letras);
         }
 
-        System.out.println("\nCargando diccionario");
-        boolean iniciado = juego.iniciarPartida(idioma, dificultad);
+        // El jugador elige cuántos intentos quiere tener en esta partida.
+        System.out.println("\nSelecciona el número de intentos:");
+        System.out.println("1. 10 intentos");
+        System.out.println("2. 12 intentos");
+        System.out.println("3. 14 intentos");
+        int opcionIntentos = leerOpcion("Opción: ", 1, 3);
+
+        int intentosElegidos;
+        if (opcionIntentos == 1) {
+            intentosElegidos = 10;
+        } else if (opcionIntentos == 2) {
+            intentosElegidos = 12;
+        } else {
+            intentosElegidos = 14;
+        }
+
+        System.out.println("\nCargando diccionario...");
+
+        boolean iniciado = juego.iniciarPartida(idioma, dificultad, intentosElegidos);
 
         if (!iniciado) {
             System.out.println("No se encontraron palabras de esa longitud en el diccionario.");
@@ -53,13 +70,13 @@ public class Consola {
         }
 
         int longitud = juego.obtenerLongitudPorDificultad(dificultad);
-        int intentos = juego.obtenerIntentosPorDificultad(dificultad);
 
+        // Se muestra la longitud junto con los intentos elegidos por el jugador.
         System.out.println("Es una palabra de " + longitud +
-                " letras, tienes " + intentos + " intentos disponibles.");
+                " letras, tienes " + intentosElegidos + " intentos disponibles.");
     }
 
-    private int leerOpcion(String mensaje, int min, int max) {
+    private int leerOpcion(String mensaje, int opc1, int opc3) {
         int opcion = 0;
         boolean valido = false;
 
@@ -68,10 +85,10 @@ public class Consola {
             String entrada = scanner.nextLine().trim();
             try {
                 opcion = Integer.parseInt(entrada);
-                if (opcion >= min && opcion <= max) {
+                if (opcion >= opc1 && opcion <= opc3) {
                     valido = true;
                 } else {
-                    System.out.println("Elige una opción entre " + min + " y " + max + ".");
+                    System.out.println("Elige una opción entre " + opc1 + " y " + opc3 + ".");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Escribe un número válido");
