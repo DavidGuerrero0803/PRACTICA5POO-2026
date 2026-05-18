@@ -59,27 +59,7 @@ public class ProcesadorRonda {
     }
 
     public double calcularProximidad(String intento) {
-        double valorAbajo = palabraAValor(limiteAbajo);
-        double valorArriba = palabraAValor(limiteArriba);
-        double valorIntento = palabraAValor(intento);
-        double valorSecreto = palabraAValor(palabraSecreta);
-
-        double rango = valorArriba - valorAbajo;
-        if (rango == 0) {
-            return 100.0;
-        }
-
-        double distancia = Math.abs(valorIntento - valorSecreto);
-        double proximidad = (1.0 - (distancia / rango)) * 100.0;
-
-        if (proximidad < 0.0) {
-            return 0.0;
-        }
-        if (proximidad > 100.0) {
-            return 100.0;
-        }
-
-        return Math.round(proximidad * 10.0) / 10.0;
+        return calcularProximidadLimite(intento);
     }
 
     public double calcularProximidadLimite(String limite) {
