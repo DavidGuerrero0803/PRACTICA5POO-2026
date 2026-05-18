@@ -10,7 +10,7 @@ public class Consola {
 
     public Consola() {
         this.scanner = new Scanner(System.in);
-        this.juego = new Betweenle(3);
+        this.juego = new Betweenle(7);
     }
 
     public void iniciar() {
@@ -76,7 +76,7 @@ public class Consola {
                 " letras, tienes " + intentosElegidos + " intentos disponibles.");
     }
 
-    private int leerOpcion(String mensaje, int opc1, int opc3) {
+    private int leerOpcion(String mensaje, int opc1, int opcAlt) {
         int opcion = 0;
         boolean valido = false;
 
@@ -85,10 +85,10 @@ public class Consola {
             String entrada = scanner.nextLine().trim();
             try {
                 opcion = Integer.parseInt(entrada);
-                if (opcion >= opc1 && opcion <= opc3) {
+                if (opcion >= opc1 && opcion <= opcAlt) {
                     valido = true;
                 } else {
-                    System.out.println("Elige una opción entre " + opc1 + " y " + opc3 + ".");
+                    System.out.println("Elige una opción entre " + opc1 + " y " + opcAlt + ".");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Escribe un número válido");
@@ -119,17 +119,28 @@ public class Consola {
                 continue;
             }
 
-            String intento = leerEntrada("Escribe tu palabra: ");
+            String intento = leerEntrada("Escribe una palabra: ");
             String resultado = juego.procesarIntento(intento);
 
             if (resultado.equals("longitud")) {
-                System.out.println("La palabra debe tener " +
+                System.out.println("\nLa palabra debe tener " +
                         juego.getEstadoActual().getLongitudPalabra() + " letras. Intenta de nuevo.");
                 continue;
             }
 
             if (resultado.equals("no encontrada")) {
                 manejarPalabraNoEncontrada(intento);
+                continue;
+            }
+
+            if (resultado.equals("fuera de rango")) {
+                System.out.println("La palabra " + intento.toUpperCase()
+                        + " está fuera del rango válido.");
+                System.out.println("Ingresa una palabra que esté alfabéticamente entre ["
+                        + juego.getEstadoActual().getLimiteAbajo().toUpperCase()
+                        + "] y ["
+                        + juego.getEstadoActual().getLimiteArriba().toUpperCase()
+                        + "].");
                 continue;
             }
 
@@ -140,8 +151,8 @@ public class Consola {
 
             if (resultado.equals("correcto")) {
                 mostrarHistorial(numeroIntento + 1);
-                System.out.println("\nGANASTE!");
-                System.out.println("La palabra era: " + intento.toUpperCase());
+                System.out.println("LA PALABRA ERA: " + intento.toUpperCase());
+                System.out.println("¡GANADOR!");
                 return;
             }
 
@@ -153,14 +164,14 @@ public class Consola {
 
             numeroIntento++;
         }
+
         System.out.println("\n---------------------------------------------------");
         System.out.println("               RESUMEN DE LA PARTIDA               ");
         System.out.println("---------------------------------------------------");
         mostrarHistorial(numeroIntento);
 
-        System.out.println("\nSE ACABARON LOS INTENTOS");
-        System.out.println("La palabra secreta era: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
-
+        System.out.println("LA PALABRA ERA: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
+        System.out.println("PERDISTE LA PARTIDA :(");
     }
 
     private String leerEntrada(String mensaje) {
