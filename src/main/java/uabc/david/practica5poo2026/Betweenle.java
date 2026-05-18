@@ -41,8 +41,20 @@ public class Betweenle {
         return 14;
     }
 
+    public ArrayList<String> getHistorial() {
+        return estadoActual.getHistorialIntentos()
+                .stream()
+                .map(entrada -> {
+                    String[] partes = entrada.split("\\|");
+                    String palabra = partes[0];
+                    String resultado = partes[1];
+                    return palabra.toUpperCase() + " - " + resultado.toUpperCase();
+                })
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public String getEstado() {
-        boolean sinIntentos = estadoActual.getHistorial().isEmpty();
+        boolean sinIntentos = estadoActual.getHistorialIntentos().isEmpty();
 
         String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteAbajo());
         String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteArriba());
@@ -117,6 +129,11 @@ public class Betweenle {
             return "no encontrada";
         }
 
+        // La palabra debe estar dentro del rango actual.
+        if (!estadoActual.estaEnRango(palabraIngresada)) {
+            return "fuera de rango";
+        }
+
         String resultado = estadoActual.procesarIntento(palabraIngresada);
 
         if (resultado.equals("correcto") || !estadoActual.tieneIntentos()) {
@@ -140,7 +157,7 @@ public class Betweenle {
         }
 
         if (opcionPista == 1 || opcionPista == 2) {
-            if (estadoActual.getHistorial().isEmpty()) {
+            if (estadoActual.getHistorialIntentos().isEmpty()) {
                 return "requiere intento";
             }
         }
@@ -161,20 +178,6 @@ public class Betweenle {
         }
 
         return "opción inválida";
-    }
-
-    public ArrayList<String> obtenerHistorial() {
-        return estadoActual.getHistorial()
-                .stream()
-                .map(entrada -> {
-                    String[] partes = entrada.split("\\|");
-                    String palabra = partes[0];
-                    String resultado = partes[1];
-                    String proximidad = partes[2];
-                    return palabra + " - " + resultado.toUpperCase() + " (" +
-                            proximidad + "% de proximidad)";
-                })
-                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 }

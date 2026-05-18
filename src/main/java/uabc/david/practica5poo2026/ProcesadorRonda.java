@@ -33,7 +33,7 @@ public class ProcesadorRonda {
         return letrasUsadas;
     }
 
-    public ArrayList<String> getHistorial() {
+    public ArrayList<String> getHistorialIntentos() {
         return historialIntentos;
     }
 

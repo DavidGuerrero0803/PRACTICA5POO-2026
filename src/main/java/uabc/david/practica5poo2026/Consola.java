@@ -169,7 +169,7 @@ public class Consola {
     }
 
     private void mostrarHistorial(int totalIntentos) {
-        ArrayList<String> historial = juego.obtenerHistorial();
+        ArrayList<String> historial = juego.getHistorial();
         if (historial.isEmpty()) {
             System.out.println("\nNo se ha escrito ninguna palabra");
             return;

@@ -9917,3 +9917,5 @@ zoológico
 zorra
 zorro
 zurdo
+
+masca
