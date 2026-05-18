@@ -100,6 +100,7 @@ public class Consola {
 
     private void ejecutarPartida() {
         int numeroIntento = 1;
+        boolean esGanador = false;
 
         while (juego.juegoActivo()) {
             System.out.println("\n-----------------------------------------");
@@ -134,7 +135,7 @@ public class Consola {
             }
 
             if (resultado.equals("fuera de rango")) {
-                System.out.println("La palabra " + intento.toUpperCase()
+                System.out.println("\nLa palabra " + intento.toUpperCase()
                         + " está fuera del rango válido.");
                 System.out.println("Ingresa una palabra que esté alfabéticamente entre ["
                         + juego.getEstadoActual().getLimiteAbajo().toUpperCase()
@@ -150,16 +151,14 @@ public class Consola {
             }
 
             if (resultado.equals("correcto")) {
-                mostrarHistorial(numeroIntento + 1);
-                System.out.println("LA PALABRA ERA: " + intento.toUpperCase());
-                System.out.println("¡GANADOR!");
-                return;
+                esGanador = true;
+                break;
             }
 
             if (resultado.equals("antes")) {
-                System.out.println("La palabra secreta está ANTES de " + intento + " alfabéticamente.");
+                System.out.println("\nLa palabra secreta está ANTES de " + intento.toUpperCase() + " alfabéticamente.");
             } else if (resultado.equals("despues")) {
-                System.out.println("La palabra secreta está DESPUÉS de " + intento + " alfabéticamente.");
+                System.out.println("\nLa palabra secreta está DESPUÉS de " + intento.toUpperCase() + " alfabéticamente.");
             }
 
             numeroIntento++;
@@ -168,10 +167,18 @@ public class Consola {
         System.out.println("\n---------------------------------------------------");
         System.out.println("               RESUMEN DE LA PARTIDA               ");
         System.out.println("---------------------------------------------------");
-        mostrarHistorial(numeroIntento);
 
-        System.out.println("LA PALABRA ERA: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
-        System.out.println("PERDISTE LA PARTIDA :(");
+        mostrarHistorial(esGanador ? numeroIntento + 1 : numeroIntento);
+
+        System.out.println("\nLA PALABRA ERA: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
+
+        if (esGanador) {
+            System.out.println("\nADIVINASTE LA PALABRA");
+            System.out.println("¡GANASTE LA PARTIDA!");
+        } else {
+            System.out.println("\nTE QUEDASTE SIN INTENTOS");
+            System.out.println("PERDISTE LA PARTIDA :(");
+        }
     }
 
     private String leerEntrada(String mensaje) {
@@ -201,7 +208,7 @@ public class Consola {
             return;
         }
 
-        System.out.print("Letras utilizadas: ");
+        System.out.print("\nLetras usadas: ");
         while (iterador.hasNext()) {
             System.out.print(iterador.next().toUpperCase() + " ");
         }
@@ -228,11 +235,11 @@ public class Consola {
             return;
         }
 
-        System.out.println("Pista: " + resultadoPista);
+        System.out.println("\nPista: " + resultadoPista);
     }
 
     private void manejarPalabraInexistente(String palabra) {
-        System.out.println("La palabra " + palabra + " no está en el diccionario.");
+        System.out.println("\nLa palabra " + palabra + " no está en el diccionario.");
         System.out.println("¿Puedes demostrar que es una palabra válida?");
         System.out.println("1. Sí, agregarla al diccionario");
         System.out.println("2. No, escribir otra palabra");

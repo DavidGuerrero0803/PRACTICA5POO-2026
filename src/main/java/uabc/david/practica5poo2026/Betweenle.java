@@ -45,10 +45,9 @@ public class Betweenle {
         return estadoActual.getHistorialIntentos()
                 .stream()
                 .map(entrada -> {
-                    String[] partes = entrada.split("\\|");
-                    String palabra = partes[0];
-                    String resultado = partes[1];
-                    return palabra.toUpperCase() + " - " + resultado.toUpperCase();
+                    String[] historialPalabras = entrada.split("\\|");
+                    String palabra = historialPalabras[0];
+                    return palabra.toUpperCase();
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
     }
