@@ -7,8 +7,9 @@ import java.util.HashSet;
 import static java.text.Normalizer.normalize;
 
 public class ProcesadorRonda {
-    private HashSet<String> letrasUsadas;
     private ArrayList<String> historialIntentos;
+    private ArrayList<String> palabrasOrdenadas;
+    private HashSet<String> letrasUsadas;
     private String dificultad;
     private String limiteAbajo;
     private String limiteArriba;
@@ -17,7 +18,7 @@ public class ProcesadorRonda {
     private int longitudPalabra;
     private boolean pistaUtilizada;
 
-    public ProcesadorRonda(String palabraSecreta, int intentosMaximos, String dificultad) {
+    public ProcesadorRonda(String palabraSecreta, int intentosMaximos, String dificultad, ArrayList<String> palabrasOrdenadas) {
         this.palabraSecreta = palabraSecreta;
         this.intentosRestantes = intentosMaximos;
         this.dificultad = dificultad;
@@ -27,6 +28,7 @@ public class ProcesadorRonda {
         this.pistaUtilizada = false;
         this.limiteAbajo = "a".repeat(longitudPalabra);
         this.limiteArriba = "z".repeat(longitudPalabra);
+        this.palabrasOrdenadas = palabrasOrdenadas;
     }
 
     public String procesarIntento(String intento) {

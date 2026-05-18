@@ -1,6 +1,7 @@
 package uabc.david.practica5poo2026;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Betweenle {
@@ -28,13 +29,15 @@ public class Betweenle {
 
         int longitud = obtenerLongitudPorDificultad(dificultad);
 
-        String palabraSecreta = diccionario.obtenerPalabraAleatoria(longitud);
-        if (palabraSecreta == null) {
+        ArrayList<String> palabrasOrdenadas = diccionario.obtenerPalabrasOrdenadas(longitud);
+        if (palabrasOrdenadas.isEmpty()) {
             return false;
         }
 
-        // Se usa directamente el valor recibido como parámetro
-        estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad);
+        Random valorAleatorio = new Random();
+        String palabraSecreta = palabrasOrdenadas.get(valorAleatorio.nextInt(palabrasOrdenadas.size()));
+
+        estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad, palabrasOrdenadas);
         partidaActiva = true;
         return true;
     }
