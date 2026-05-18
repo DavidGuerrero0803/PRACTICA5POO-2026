@@ -27,7 +27,7 @@ public class Consola {
         String idioma = opcionIdioma == 1 ? "español" : "ingles";
 
         System.out.println("\nSelecciona la dificultad:");
-        System.out.println("1. Fácil   (5 letras)");
+        System.out.println("1. Fácil (5 letras)");
         System.out.println("2. Intermedio (6 letras)");
         System.out.println("3. Difícil (n letras)");
         int opcionDificultad = leerOpcion("Opción: ", 1, 3);
@@ -210,6 +210,13 @@ public class Consola {
         int opcionPista = leerOpcion("Elige una opción: ", 1, 3);
 
         String resultadoPista = juego.pedirPista(opcionPista);
+
+        if (resultadoPista.equals("requiere intento")) {
+            System.out.println("\nNo puedes usar esta pista.");
+            System.out.println("Ingresa al menos una palabra para establecer los límites iniciales.");
+            return;
+        }
+
         System.out.println("Pista: " + resultadoPista);
     }
 

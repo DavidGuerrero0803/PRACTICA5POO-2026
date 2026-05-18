@@ -150,9 +150,31 @@ public class ProcesadorRonda {
     }
 
     public String pistaMoverAbajo() {
-        pistaUtilizada = true;
-        limiteAbajo = interpolarLimite(limiteAbajo, palabraSecreta, 0.01);
-        return limiteAbajo;
+        this.pistaUtilizada = true;
+
+        int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());
+        int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limiteArriba.toLowerCase());
+
+        if (indiceSecreto < 0) {
+            indiceSecreto = -(indiceSecreto + 1);
+        }
+        if (indiceLimite < 0) {
+            indiceLimite = -(indiceLimite + 1);
+        }
+
+        int distancia = indiceLimite - indiceSecreto;
+
+        int pasos = Math.max(1, (int)(palabrasOrdenadas.size() * 0.01));
+
+        if (pasos >= distancia) {
+            pasos = Math.max(1, distancia - 1);
+        }
+
+        int nuevoIndice = indiceLimite - pasos;
+        nuevoIndice = Math.max(indiceSecreto, Math.min(palabrasOrdenadas.size() - 1, nuevoIndice));
+
+        this.limiteArriba = palabrasOrdenadas.get(nuevoIndice);
+        return this.limiteArriba;
     }
 
     public String pistaLetraInicial() {
@@ -213,6 +235,5 @@ public class ProcesadorRonda {
     public boolean pistaUtilizada() {
         return pistaUtilizada;
     }
-
 
 }

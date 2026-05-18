@@ -83,14 +83,20 @@ public class Betweenle {
             return "pista utilizada";
         }
 
+        if (opcionPista == 1 || opcionPista == 2) {
+            if (estadoActual.getHistorial().isEmpty()) {
+                return "requiere intento";
+            }
+        }
+
         if (opcionPista == 1) {
             String nuevoLimite = estadoActual.pistaMoverArriba();
-            return "El límite superior ahora es: " + nuevoLimite;
+            return "El límite superior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         if (opcionPista == 2) {
             String nuevoLimite = estadoActual.pistaMoverAbajo();
-            return "El límite inferior ahora es: " + nuevoLimite;
+            return "El límite inferior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         if (opcionPista == 3) {
