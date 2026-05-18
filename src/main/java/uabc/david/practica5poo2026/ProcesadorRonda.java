@@ -2,6 +2,7 @@ package uabc.david.practica5poo2026;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 import static java.text.Normalizer.normalize;
@@ -39,11 +40,11 @@ public class ProcesadorRonda {
         }
 
         String resultado;
-        int comparacion = intento.compareTo(palabraSecreta);
+        int intentoComparado = intento.compareTo(palabraSecreta);
 
-        if (comparacion == 0) {
+        if (intentoComparado == 0) {
             resultado = "correcto";
-        } else if (comparacion > 0) {
+        } else if (intentoComparado > 0) {
             resultado = "antes";
             limiteArriba = intento;
         } else {
@@ -61,14 +62,14 @@ public class ProcesadorRonda {
         double valorAbajo = palabraAValor(limiteAbajo);
         double valorArriba = palabraAValor(limiteArriba);
         double valorIntento = palabraAValor(intento);
-        double valorSecreta = palabraAValor(palabraSecreta);
+        double valorSecreto = palabraAValor(palabraSecreta);
 
         double rango = valorArriba - valorAbajo;
         if (rango == 0) {
             return 100.0;
         }
 
-        double distancia = Math.abs(valorIntento - valorSecreta);
+        double distancia = Math.abs(valorIntento - valorSecreto);
         double proximidad = (1.0 - (distancia / rango)) * 100.0;
 
         if (proximidad < 0.0) {
@@ -79,6 +80,37 @@ public class ProcesadorRonda {
         }
 
         return Math.round(proximidad * 10.0) / 10.0;
+    }
+
+    public double calcularProximidadLimite(String limite) {
+        int totalPalabras = palabrasOrdenadas.size();
+        if (totalPalabras <= 1) {
+            return 0.01;
+        }
+
+        // Se buscan las posiciones alfabéticas reales en el diccionario.
+        int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());
+        int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limite.toLowerCase());
+
+        if (indiceSecreto < 0) {
+            indiceSecreto = -(indiceSecreto + 1);
+        }
+        if (indiceLimite < 0) {
+            indiceLimite = -(indiceLimite + 1);
+        }
+
+        // Distancia en cantidad de palabras reales,
+        double distanciaIndices = Math.abs(indiceLimite - indiceSecreto);
+        double distanciaPorcentaje = (distanciaIndices / totalPalabras) * 100.0;
+
+         if (distanciaPorcentaje < 0.001) {
+            return 0.001;
+        }
+        if (distanciaPorcentaje > 100.0) {
+            return 100.0;
+        }
+
+        return Math.round(distanciaPorcentaje * 100.0) / 100.0;
     }
 
     private double palabraAValor(String palabra) {
