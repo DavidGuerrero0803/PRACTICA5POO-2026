@@ -1,11 +1,8 @@
 package uabc.david.practica5poo2026;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-
-import static java.text.Normalizer.normalize;
 
 public class ProcesadorRonda {
     private ArrayList<String> historialIntentos;
