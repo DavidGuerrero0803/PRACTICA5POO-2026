@@ -3,7 +3,6 @@ package uabc.david.practica5poo2026;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Diccionario {

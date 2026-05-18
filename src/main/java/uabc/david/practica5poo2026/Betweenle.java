@@ -17,6 +17,66 @@ public class Betweenle {
         this.partidaActiva = false;
     }
 
+    public ProcesadorRonda getEstadoActual() {
+        return estadoActual;
+    }
+
+    public int getLongitudDificultad(String dificultad) {
+        if (dificultad.equals("facil")) {
+            return 5;
+        }
+        if (dificultad.equals("intermedio")) {
+            return 6;
+        }
+        return letrasDificil;
+    }
+
+    public int getIntentosDificultad(String dificultad) {
+        if (dificultad.equals("facil")) {
+            return 10;
+        }
+        if (dificultad.equals("intermedio")) {
+            return 12;
+        }
+        return 14;
+    }
+
+    public String getEstado() {
+        boolean sinIntentos = estadoActual.getHistorial().isEmpty();
+
+        String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteAbajo());
+        String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteArriba());
+
+        String palabraOculta = (" -".repeat(estadoActual.getLongitudPalabra())).trim();
+
+        String etiquetaSuperior = String.format("%-2s", aproxSuperior);
+        String etiquetaInferior = String.format("%-2s", aproxInferior);
+
+        String limiteSuperior = estadoActual.getLimiteAbajo()
+                .toUpperCase().chars()
+                .collect(StringBuilder::new,
+                        (sb, c) -> sb.append((char) c).append(' '),
+                        StringBuilder::append)
+                .toString().trim();
+
+        String limiteInferior = estadoActual.getLimiteArriba()
+                .toUpperCase().chars()
+                .collect(StringBuilder::new,
+                        (sb, c) -> sb.append((char) c).append(' '),
+                        StringBuilder::append)
+                .toString().trim();
+
+        int anchoFila = etiquetaSuperior.length() + 8 + limiteSuperior.length() + 2;
+        int margen = (anchoFila - palabraOculta.length()) / 2;
+        String espaciado = " ".repeat(Math.max(0, margen));
+
+        return  etiquetaSuperior + "  [ " + limiteSuperior
+                + " ]\n"
+                + espaciado + palabraOculta + "\n"
+                + etiquetaInferior + "  [ " + limiteInferior + " ]\n"
+                + "Intentos restantes: " + estadoActual.getIntentosRestantes();
+    }
+
     public boolean iniciarPartida(String idioma, String dificultad, int intentos) {
 
         if (this.diccionario == null || !this.diccionario.getIdioma().equals(idioma)) {
@@ -27,7 +87,7 @@ public class Betweenle {
             this.diccionario.cargarArchivo(rutaArchivo);
         }
 
-        int longitud = obtenerLongitudPorDificultad(dificultad);
+        int longitud = getLongitudDificultad(dificultad);
 
         ArrayList<String> palabrasOrdenadas = diccionario.obtenerPalabrasOrdenadas(longitud);
         if (palabrasOrdenadas.isEmpty()) {
@@ -40,10 +100,6 @@ public class Betweenle {
         estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad, palabrasOrdenadas);
         partidaActiva = true;
         return true;
-    }
-
-    public ProcesadorRonda getEstadoActual() {
-        return estadoActual;
     }
 
     public String procesarIntento(String intento) {
@@ -119,34 +175,6 @@ public class Betweenle {
                             proximidad + "% de proximidad)";
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public String obtenerEstado() {
-        return "    [ " + estadoActual.getLimiteAbajo().toUpperCase()
-                + " ]\n PALABRA SECRETA \n    [ "
-                + estadoActual.getLimiteArriba().toUpperCase()
-                + " ]\nIntentos restantes : "
-                + estadoActual.getIntentosRestantes();
-    }
-
-    public int obtenerLongitudPorDificultad(String dificultad) {
-        if (dificultad.equals("facil")) {
-            return 5;
-        }
-        if (dificultad.equals("intermedio")) {
-            return 6;
-        }
-        return letrasDificil;
-    }
-
-    public int obtenerIntentosPorDificultad(String dificultad) {
-        if (dificultad.equals("facil")) {
-            return 10;
-        }
-        if (dificultad.equals("intermedio")) {
-            return 12;
-        }
-        return 14;
     }
 
 }

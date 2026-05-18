@@ -69,7 +69,7 @@ public class Consola {
             return;
         }
 
-        int longitud = juego.obtenerLongitudPorDificultad(dificultad);
+        int longitud = juego.getLongitudDificultad(dificultad);
 
         // Se muestra la longitud junto con los intentos elegidos por el jugador.
         System.out.println("Es una palabra de " + longitud +
@@ -102,9 +102,9 @@ public class Consola {
         int numeroIntento = 1;
 
         while (juego.juegoActivo()) {
-            System.out.println("\n--------------------------");
-            System.out.println(juego.obtenerEstado());
-            System.out.println("--------------------------");
+            System.out.println("\n-----------------------------------------");
+            System.out.println(juego.getEstado());
+            System.out.println("-----------------------------------------");
 
             mostrarHistorial(numeroIntento);
             mostrarLetrasUsadas();
