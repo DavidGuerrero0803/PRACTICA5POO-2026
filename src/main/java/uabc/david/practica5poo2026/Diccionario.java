@@ -57,21 +57,6 @@ public class Diccionario {
         }
     }
 
-    public String obtenerPalabraAleatoria(int longitud) {
-        ArrayList<String> filtradas = palabras.entrySet()
-                .stream()
-                .filter(entrada -> entrada.getValue() == longitud)
-                .map(HashMap.Entry::getKey)
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        if (filtradas.isEmpty()) {
-            return null;
-        }
-
-        Random aleatorio = new Random();
-        return filtradas.get(aleatorio.nextInt(filtradas.size()));
-    }
-
     public ArrayList<String> obtenerPalabrasOrdenadas(int longitud) {
         return palabras.entrySet()
                 .stream()
