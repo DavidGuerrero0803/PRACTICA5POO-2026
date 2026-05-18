@@ -9642,3 +9642,5 @@ optic
 hight
 goats
 acorn
+fights
+cheer

@@ -55,22 +55,22 @@ public class Betweenle {
     public String getEstado() {
         boolean sinIntentos = estadoActual.getHistorialIntentos().isEmpty();
 
-        String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteAbajo());
-        String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteArriba());
+        String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadSuperior());
+        String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadInferior());
 
         String palabraOculta = (" -".repeat(estadoActual.getLongitudPalabra())).trim();
 
         String etiquetaSuperior = String.format("%-2s", aproxSuperior);
         String etiquetaInferior = String.format("%-2s", aproxInferior);
 
-        String limiteSuperior = estadoActual.getLimiteAbajo()
+        String limiteSuperior = estadoActual.getLimiteSuperior()
                 .toUpperCase().chars()
                 .collect(StringBuilder::new,
                         (sb, c) -> sb.append((char) c).append(' '),
                         StringBuilder::append)
                 .toString().trim();
 
-        String limiteInferior = estadoActual.getLimiteArriba()
+        String limiteInferior = estadoActual.getLimiteInferior()
                 .toUpperCase().chars()
                 .collect(StringBuilder::new,
                         (sb, c) -> sb.append((char) c).append(' '),
@@ -107,6 +107,32 @@ public class Betweenle {
 
         Random valorAleatorio = new Random();
         String palabraSecreta = palabrasOrdenadas.get(valorAleatorio.nextInt(palabrasOrdenadas.size()));
+
+        estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad, palabrasOrdenadas);
+        partidaActiva = true;
+        return true;
+    }
+
+    public boolean iniciarPartidaModoPrueba(String idioma, String dificultad, int intentos, String palabraForzada) {
+        if (this.diccionario == null || !this.diccionario.getIdioma().equals(idioma)) {
+            this.diccionario = new Diccionario(idioma);
+            String rutaArchivo = idioma.equals("español") ?
+                    "src/main/java/uabc/david/practica5poo2026/espanol.txt" :
+                    "src/main/java/uabc/david/practica5poo2026/ingles.txt";
+            this.diccionario.cargarArchivo(rutaArchivo);
+        }
+
+        int longitud = getLongitudDificultad(dificultad);
+        ArrayList<String> palabrasOrdenadas = diccionario.obtenerPalabrasOrdenadas(longitud);
+
+        // Forzamos la palabra que tú quieres probar (asegurándonos de que esté en minúsculas)
+        String palabraSecreta = palabraForzada.toLowerCase().trim();
+
+        // Verificamos que la palabra elegida exista en el diccionario real para no romper las búsquedas
+        if (!diccionario.existeLaPalabra(palabraSecreta)) {
+            System.out.println("ERROR: La palabra forzada '" + palabraSecreta + "' no existe en el archivo real.");
+            return false;
+        }
 
         estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad, palabrasOrdenadas);
         partidaActiva = true;
@@ -162,12 +188,12 @@ public class Betweenle {
         }
 
         if (opcionPista == 1) {
-            String nuevoLimite = estadoActual.pistaMoverArriba();
+            String nuevoLimite = estadoActual.recorrerPalabraArriba();
             return "El límite superior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         if (opcionPista == 2) {
-            String nuevoLimite = estadoActual.pistaMoverAbajo();
+            String nuevoLimite = estadoActual.recorrerPalabraAbajo();
             return "El límite inferior ahora es: " + nuevoLimite.toUpperCase();
         }
 
