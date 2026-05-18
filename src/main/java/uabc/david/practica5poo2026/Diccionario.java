@@ -1,8 +1,6 @@
 package uabc.david.practica5poo2026;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -40,8 +38,19 @@ public class Diccionario {
     }
 
     public void agregarPalabra(String palabra) {
-        String palabraAgregada = palabra.toLowerCase();
+        String palabraAgregada = palabra.toLowerCase().trim();
         palabras.put(palabraAgregada, palabraAgregada.length());
+
+        if (this.rutaArchivo != null) {
+            try {
+                BufferedWriter escritor = new BufferedWriter(new FileWriter(this.rutaArchivo, true));
+                escritor.newLine();
+                escritor.write(palabraAgregada);
+                escritor.close();
+            } catch (IOException e) {
+                System.out.println("Error al intentar escribir en el archivo: " + e.getMessage());
+            }
+        }
     }
 
     public String obtenerPalabraAleatoria(int longitud) {
