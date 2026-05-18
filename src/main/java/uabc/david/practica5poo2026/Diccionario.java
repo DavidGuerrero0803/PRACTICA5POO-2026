@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class Diccionario {
     private HashMap<String, Integer> palabras;
+    private String rutaArchivo;
     private String idioma;
 
     public Diccionario(String idioma) {
@@ -17,9 +18,10 @@ public class Diccionario {
         this.palabras = new HashMap<>();
     }
 
-    public void cargarDesdeArchivo(String rutaArchivo) {
+    public void cargarArchivo(String archivoTexto) {
+        this.rutaArchivo = archivoTexto;
         try {
-            BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
+            BufferedReader lector = new BufferedReader(new FileReader(archivoTexto));
             String linea;
             while ((linea = lector.readLine()) != null) {
                 String palabra = linea.trim().toLowerCase();
@@ -29,7 +31,7 @@ public class Diccionario {
             }
             lector.close();
         } catch (IOException e) {
-            System.out.println("Se produjo un error al cargar el archivo " + rutaArchivo);
+            System.out.println("Se produjo un error al cargar el archivo " + archivoTexto);
         }
     }
 

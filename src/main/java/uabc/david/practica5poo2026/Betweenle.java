@@ -23,7 +23,7 @@ public class Betweenle {
             String rutaArchivo = idioma.equals("español") ?
                     "src/main/java/uabc/david/practica5poo2026/espanol.txt" :
                     "src/main/java/uabc/david/practica5poo2026/ingles.txt";
-            this.diccionario.cargarDesdeArchivo(rutaArchivo);
+            this.diccionario.cargarArchivo(rutaArchivo);
         }
 
         int longitud = obtenerLongitudPorDificultad(dificultad);
