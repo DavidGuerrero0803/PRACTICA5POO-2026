@@ -129,7 +129,7 @@ public class Consola {
             }
 
             if (resultado.equals("no encontrada")) {
-                manejarPalabraNoEncontrada(intento);
+                manejarPalabraInexistente(intento);
                 continue;
             }
 
@@ -179,7 +179,7 @@ public class Consola {
         return scanner.nextLine().trim().toLowerCase();
     }
 
-    private void mostrarHistorial(int totalIntentos) {
+    private void mostrarHistorial(int intentosTotales) {
         ArrayList<String> historial = juego.getHistorial();
         if (historial.isEmpty()) {
             System.out.println("\nNo se ha escrito ninguna palabra");
@@ -231,7 +231,7 @@ public class Consola {
         System.out.println("Pista: " + resultadoPista);
     }
 
-    private void manejarPalabraNoEncontrada(String palabra) {
+    private void manejarPalabraInexistente(String palabra) {
         System.out.println("La palabra " + palabra + " no está en el diccionario.");
         System.out.println("¿Puedes demostrar que es una palabra válida?");
         System.out.println("1. Sí, agregarla al diccionario");
