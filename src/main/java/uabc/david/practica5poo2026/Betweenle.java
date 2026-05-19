@@ -45,18 +45,15 @@ public class Betweenle {
     public String getEstado() {
         boolean sinIntentos = estadoActual.getHistorialIntentos().isEmpty();
 
-        String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadSuperior());
-        String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadInferior());
+        String etiquetaSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadSuperior());
+        String etiquetaInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadInferior());
 
-        String palabraOculta = ("-".repeat(estadoActual.getLongitudPalabra()));
+        String aproxSuperior = String.format("%-2s", etiquetaSuperior);
+        String aproxInferior = String.format("%-2s", etiquetaInferior);
 
-        String etiquetaSuperior = String.format("%-2s", aproxSuperior);
-        String etiquetaInferior = String.format("%-2s", aproxInferior);
-
-        return  etiquetaSuperior + "  [ " + estadoActual.getLimiteSuperior().toUpperCase()
-                + " ]\n"
-                +  "[ " + palabraOculta + " ]" + "\n"
-                + etiquetaInferior + "  [ " + estadoActual.getLimiteInferior().toUpperCase() + " ]\n"
+        return  aproxSuperior + "  [ " + estadoActual.getLimiteSuperior().toUpperCase()
+                + " ]\n" + "\n"
+                + aproxInferior + "  [ " + estadoActual.getLimiteInferior().toUpperCase() + " ]\n"
                 + "Intentos restantes: " + estadoActual.getIntentosRestantes();
     }
 
