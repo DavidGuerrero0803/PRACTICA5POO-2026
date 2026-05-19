@@ -6,19 +6,19 @@ import java.util.stream.Collectors;
 
 public class Betweenle {
     private Diccionario diccionario;
-    private ProcesadorRonda estadoActual;
+    private ProcesadorRonda rondaActual;
     private int letrasDificil;
     private boolean partidaActiva;
 
     public Betweenle(int letrasDificil) {
         this.letrasDificil = letrasDificil;
         this.diccionario = null;
-        this.estadoActual = null;
+        this.rondaActual = null;
         this.partidaActiva = false;
     }
 
     public ProcesadorRonda getRondaActual() {
-        return estadoActual;
+        return rondaActual;
     }
 
     public int getLongitudDificultad(String dificultad) {
@@ -32,7 +32,7 @@ public class Betweenle {
     }
 
     public ArrayList<String> getHistorial() {
-        return estadoActual.getHistorialIntentos()
+        return rondaActual.getHistorialIntentos()
                 .stream()
                 .map(entrada -> {
                     String[] historialPalabras = entrada.split("\\|");
@@ -43,18 +43,18 @@ public class Betweenle {
     }
 
     public String getEstado() {
-        boolean sinIntentos = estadoActual.getHistorialIntentos().isEmpty();
+        boolean sinIntentos = rondaActual.getHistorialIntentos().isEmpty();
 
-        String etiquetaSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadSuperior());
-        String etiquetaInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadInferior());
+        String etiquetaSuperior = sinIntentos ? "?" : String.valueOf(rondaActual.getProximidadSuperior());
+        String etiquetaInferior = sinIntentos ? "?" : String.valueOf(rondaActual.getProximidadInferior());
 
         String aproxSuperior = String.format("%-2s", etiquetaSuperior);
         String aproxInferior = String.format("%-2s", etiquetaInferior);
 
-        return  aproxSuperior + "  [ " + estadoActual.getLimiteSuperior().toUpperCase()
+        return  aproxSuperior + "  [ " + rondaActual.getLimiteSuperior().toUpperCase()
                 + " ]\n" + "\n"
-                + aproxInferior + "  [ " + estadoActual.getLimiteInferior().toUpperCase() + " ]\n"
-                + "Intentos restantes: " + estadoActual.getIntentosRestantes();
+                + aproxInferior + "  [ " + rondaActual.getLimiteInferior().toUpperCase() + " ]\n"
+                + "Intentos restantes: " + rondaActual.getIntentosRestantes();
     }
 
     public boolean iniciarPartida(String idioma, String dificultad, int intentos) {
@@ -77,7 +77,7 @@ public class Betweenle {
         Random valorAleatorio = new Random();
         String palabraSecreta = palabrasOrdenadas.get(valorAleatorio.nextInt(palabrasOrdenadas.size()));
 
-        estadoActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad, palabrasOrdenadas);
+        rondaActual = new ProcesadorRonda(palabraSecreta, intentos, dificultad, palabrasOrdenadas);
         partidaActiva = true;
         return true;
     }
@@ -85,11 +85,11 @@ public class Betweenle {
     public String procesarIntento(String intento) {
         String palabraIngresada = intento.trim().toLowerCase();
 
-        if (!estadoActual.tieneIntentos()) {
+        if (!rondaActual.tieneIntentos()) {
             return "sin intentos";
         }
 
-        if (palabraIngresada.length() != estadoActual.getLongitudPalabra()) {
+        if (palabraIngresada.length() != rondaActual.getLongitudPalabra()) {
             return "longitud";
         }
 
@@ -98,13 +98,13 @@ public class Betweenle {
         }
 
         // La palabra debe estar dentro del rango actual.
-        if (!estadoActual.estaEnRango(palabraIngresada)) {
+        if (!rondaActual.estaEnRango(palabraIngresada)) {
             return "fuera de rango";
         }
 
-        String resultado = estadoActual.procesarIntento(palabraIngresada);
+        String resultado = rondaActual.procesarIntento(palabraIngresada);
 
-        if (resultado.equals("correcto") || !estadoActual.tieneIntentos()) {
+        if (resultado.equals("correcto") || !rondaActual.tieneIntentos()) {
             partidaActiva = false;
         }
 
@@ -120,28 +120,28 @@ public class Betweenle {
     }
 
     public String pedirPista(int opcionPista) {
-        if (estadoActual.pistaUtilizada()) {
+        if (rondaActual.pistaUtilizada()) {
             return "pista utilizada";
         }
 
         if (opcionPista == 1 || opcionPista == 2) {
-            if (estadoActual.getHistorialIntentos().isEmpty()) {
+            if (rondaActual.getHistorialIntentos().isEmpty()) {
                 return "requiere intento";
             }
         }
 
         if (opcionPista == 1) {
-            String nuevoLimite = estadoActual.recorrerPalabraArriba();
+            String nuevoLimite = rondaActual.recorrerPalabraArriba();
             return "El límite superior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         if (opcionPista == 2) {
-            String nuevoLimite = estadoActual.recorrerPalabraAbajo();
+            String nuevoLimite = rondaActual.recorrerPalabraAbajo();
             return "El límite inferior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         if (opcionPista == 3) {
-            String letra = estadoActual.pistaLetraInicial();
+            String letra = rondaActual.pistaLetraInicial();
             return "La palabra empieza con la letra: " + letra.toUpperCase();
         }
 
