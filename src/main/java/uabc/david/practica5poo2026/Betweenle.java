@@ -31,16 +31,6 @@ public class Betweenle {
         return letrasDificil;
     }
 
-    public int getIntentosDificultad(String dificultad) {
-        if (dificultad.equals("facil")) {
-            return 10;
-        }
-        if (dificultad.equals("intermedio")) {
-            return 12;
-        }
-        return 14;
-    }
-
     public ArrayList<String> getHistorial() {
         return estadoActual.getHistorialIntentos()
                 .stream()
