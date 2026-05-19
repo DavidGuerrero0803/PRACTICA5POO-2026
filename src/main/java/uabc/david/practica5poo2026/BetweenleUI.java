@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class Consola {
+public class BetweenleUI {
     private Betweenle juego;
     private Scanner scanner;
 
-    public Consola() {
+    public BetweenleUI() {
         this.scanner = new Scanner(System.in);
         this.juego = new Betweenle(7);
     }
@@ -252,7 +252,7 @@ public class Consola {
     }
 
     public static void main(String[] args) {
-        Consola ui = new Consola();
+        BetweenleUI ui = new BetweenleUI();
         ui.iniciar();
     }
 }
