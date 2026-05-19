@@ -48,33 +48,15 @@ public class Betweenle {
         String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadSuperior());
         String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadInferior());
 
-        String palabraOculta = (" -".repeat(estadoActual.getLongitudPalabra())).trim();
+        String palabraOculta = ("-".repeat(estadoActual.getLongitudPalabra()));
 
         String etiquetaSuperior = String.format("%-2s", aproxSuperior);
         String etiquetaInferior = String.format("%-2s", aproxInferior);
 
-        String limiteSuperior = estadoActual.getLimiteSuperior()
-                .toUpperCase().chars()
-                .collect(StringBuilder::new,
-                        (sb, c) -> sb.append((char) c).append(' '),
-                        StringBuilder::append)
-                .toString().trim();
-
-        String limiteInferior = estadoActual.getLimiteInferior()
-                .toUpperCase().chars()
-                .collect(StringBuilder::new,
-                        (sb, c) -> sb.append((char) c).append(' '),
-                        StringBuilder::append)
-                .toString().trim();
-
-        int anchoFila = etiquetaSuperior.length() + 8 + limiteSuperior.length() + 2;
-        int margen = (anchoFila - palabraOculta.length()) / 2;
-        String espaciado = " ".repeat(Math.max(0, margen));
-
-        return  etiquetaSuperior + "  [ " + limiteSuperior
+        return  etiquetaSuperior + "  [ " + estadoActual.getLimiteSuperior().toUpperCase()
                 + " ]\n"
-                + espaciado + palabraOculta + "\n"
-                + etiquetaInferior + "  [ " + limiteInferior + " ]\n"
+                +  "[ " + palabraOculta + " ]" + "\n"
+                + etiquetaInferior + "  [ " + estadoActual.getLimiteInferior().toUpperCase() + " ]\n"
                 + "Intentos restantes: " + estadoActual.getIntentosRestantes();
     }
 
