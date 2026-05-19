@@ -29,8 +29,6 @@ abran
 abras
 abrazo
 abre
-ábrela
-ábrelo
 abren
 abres
 abrí
@@ -91,7 +89,6 @@ acción
 acciones
 ace
 aceite
-acelera
 acento
 acepta
 aceptable
@@ -1161,14 +1158,12 @@ botones
 bóveda
 boxeador
 boxeo
-bragas
 brasil
 bravo
 brazalete
 brazo
 brazos
 brecha
-bree
 bretaña
 breve
 brigada
@@ -1585,7 +1580,6 @@ certeza
 certificado
 cerveza
 cervezas
-césar
 cesar
 césped
 chaleco
@@ -1803,7 +1797,6 @@ comeremos
 comes
 cometa
 comete
-cómete
 cometer
 cometí
 cometido
@@ -2791,9 +2784,7 @@ deshacerte
 deshazte
 desierto
 desnuda
-desnudas
 desnudo
-desnudos
 desorden
 despacho
 despacio
@@ -5135,7 +5126,6 @@ japón
 japonés
 japonesa
 japoneses
-jaque
 jardín
 jardinero
 jaula
@@ -5150,19 +5140,6 @@ jet
 jinete
 jinetes
 jo
-joda
-jodan
-jodas
-jode
-joder
-jódete
-jodete
-jodida
-jodidamente
-jodido
-jodidos
-jodiendo
-jodió
 joven
 jovencita
 jovencito
@@ -5764,6 +5741,7 @@ masacre
 masaje
 masajes
 masas
+masca
 máscara
 máscaras
 mascota
@@ -9917,5 +9895,3 @@ zoológico
 zorra
 zorro
 zurdo
-
-masca
