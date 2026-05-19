@@ -55,22 +55,22 @@ public class Betweenle {
     public String getEstado() {
         boolean sinIntentos = estadoActual.getHistorialIntentos().isEmpty();
 
-        String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteAbajo());
-        String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadLimiteArriba());
+        String aproxSuperior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadSuperior());
+        String aproxInferior = sinIntentos ? "?" : String.valueOf(estadoActual.getProximidadInferior());
 
         String palabraOculta = (" -".repeat(estadoActual.getLongitudPalabra())).trim();
 
         String etiquetaSuperior = String.format("%-2s", aproxSuperior);
         String etiquetaInferior = String.format("%-2s", aproxInferior);
 
-        String limiteSuperior = estadoActual.getLimiteAbajo()
+        String limiteSuperior = estadoActual.getLimiteSuperior()
                 .toUpperCase().chars()
                 .collect(StringBuilder::new,
                         (sb, c) -> sb.append((char) c).append(' '),
                         StringBuilder::append)
                 .toString().trim();
 
-        String limiteInferior = estadoActual.getLimiteArriba()
+        String limiteInferior = estadoActual.getLimiteInferior()
                 .toUpperCase().chars()
                 .collect(StringBuilder::new,
                         (sb, c) -> sb.append((char) c).append(' '),
@@ -162,12 +162,12 @@ public class Betweenle {
         }
 
         if (opcionPista == 1) {
-            String nuevoLimite = estadoActual.pistaMoverArriba();
+            String nuevoLimite = estadoActual.recorrerPalabraArriba();
             return "El límite superior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         if (opcionPista == 2) {
-            String nuevoLimite = estadoActual.pistaMoverAbajo();
+            String nuevoLimite = estadoActual.recorrerPalabraAbajo();
             return "El límite inferior ahora es: " + nuevoLimite.toUpperCase();
         }
 

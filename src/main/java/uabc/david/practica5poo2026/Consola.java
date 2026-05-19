@@ -43,7 +43,7 @@ public class Consola {
             juego = new Betweenle(letras);
         }
 
-        // El jugador elige cuántos intentos quiere tener en esta partida.
+        // El jugador elige cuántos intentos quiere tener en la partida.
         System.out.println("\nSelecciona el número de intentos:");
         System.out.println("1. 10 intentos");
         System.out.println("2. 12 intentos");
@@ -138,9 +138,9 @@ public class Consola {
                 System.out.println("\nLa palabra " + intento.toUpperCase()
                         + " está fuera del rango válido.");
                 System.out.println("Ingresa una palabra que esté alfabéticamente entre ["
-                        + juego.getEstadoActual().getLimiteAbajo().toUpperCase()
+                        + juego.getEstadoActual().getLimiteSuperior().toUpperCase()
                         + "] y ["
-                        + juego.getEstadoActual().getLimiteArriba().toUpperCase()
+                        + juego.getEstadoActual().getLimiteInferior().toUpperCase()
                         + "].");
                 continue;
             }
