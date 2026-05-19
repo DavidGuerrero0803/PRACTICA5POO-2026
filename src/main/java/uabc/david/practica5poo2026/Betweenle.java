@@ -17,7 +17,7 @@ public class Betweenle {
         this.partidaActiva = false;
     }
 
-    public ProcesadorRonda getEstadoActual() {
+    public ProcesadorRonda getRondaActual() {
         return estadoActual;
     }
 

@@ -125,7 +125,7 @@ public class Consola {
 
             if (resultado.equals("longitud")) {
                 System.out.println("\nLa palabra debe tener " +
-                        juego.getEstadoActual().getLongitudPalabra() + " letras. Intenta de nuevo.");
+                        juego.getRondaActual().getLongitudPalabra() + " letras. Intenta de nuevo.");
                 continue;
             }
 
@@ -138,9 +138,9 @@ public class Consola {
                 System.out.println("\nLa palabra " + intento.toUpperCase()
                         + " está fuera del rango válido.");
                 System.out.println("Ingresa una palabra que esté alfabéticamente entre ["
-                        + juego.getEstadoActual().getLimiteSuperior().toUpperCase()
+                        + juego.getRondaActual().getLimiteSuperior().toUpperCase()
                         + "] y ["
-                        + juego.getEstadoActual().getLimiteInferior().toUpperCase()
+                        + juego.getRondaActual().getLimiteInferior().toUpperCase()
                         + "].");
                 continue;
             }
@@ -170,7 +170,7 @@ public class Consola {
 
         mostrarHistorial(esGanador ? numeroIntento + 1 : numeroIntento);
 
-        System.out.println("\nLA PALABRA ERA: " + juego.getEstadoActual().getPalabraSecreta().toUpperCase());
+        System.out.println("\nLA PALABRA ERA: " + juego.getRondaActual().getPalabraSecreta().toUpperCase());
 
         if (esGanador) {
             System.out.println("\nADIVINASTE LA PALABRA");
@@ -202,7 +202,7 @@ public class Consola {
     }
 
     private void mostrarLetrasUsadas() {
-        Iterator<String> iterador = juego.getEstadoActual().getLetrasUsadas().iterator();
+        Iterator<String> iterador = juego.getRondaActual().getLetrasUsadas().iterator();
 
         if (!iterador.hasNext()) {
             return;
@@ -216,7 +216,7 @@ public class Consola {
     }
 
     private void gestionarPista() {
-        if (juego.getEstadoActual().pistaUtilizada()) {
+        if (juego.getRondaActual().pistaUtilizada()) {
             System.out.println("Ya usaste tu pista en esta partida.");
             return;
         }
