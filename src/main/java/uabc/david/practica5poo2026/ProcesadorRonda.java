@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
+/**
+ * La clase administra el estado y la lógica de una ronda activa del juego Betweenle.
+ * Esta clase lleva el registro de los límites (superior e inferior),
+ * el historial de intentos (palabras), las letras usadas por el jugador, y calcula
+ * qué tan cerca está cada intento de la palabra secreta.
+ */
 public class ProcesadorRonda {
     private ArrayList<String> historialIntentos;
     private ArrayList<String> palabrasOrdenadas;
@@ -16,6 +22,13 @@ public class ProcesadorRonda {
     private int longitudPalabra;
     private boolean pistaUtilizada;
 
+    /**
+     * Crea una nueva ronda con todos sus parámetros iniciales.
+     * @param palabraSecreta La palabra que el jugador debe adivinar.
+     * @param intentosMaximos Número máximo de intentos.
+     * @param dificultad Nivel de dificultad elegido por el jugador.
+     * @param palabrasOrdenadas ArrayList ordenada de palabras válidas para calcular proximidad.
+     */
     public ProcesadorRonda(String palabraSecreta, int intentosMaximos, String dificultad, ArrayList<String> palabrasOrdenadas) {
         this.palabraSecreta = palabraSecreta;
         this.intentosRestantes = intentosMaximos;
@@ -29,42 +42,84 @@ public class ProcesadorRonda {
         this.palabrasOrdenadas = palabrasOrdenadas;
     }
 
+    /**
+     * Devuelve las letras que han sido usadas.
+     * @return Conjunto de letras utilizadas por el jugador.
+     */
     public HashSet<String> getLetrasUsadas() {
         return letrasUsadas;
     }
 
+    /**
+     * Devuelve en un arreglo el historial de las palabras usadas.
+     * @return ArrayList del historial de intentos (palabras usadas).
+     */
     public ArrayList<String> getHistorialIntentos() {
         return historialIntentos;
     }
 
+    /**
+     * Regresa la palabra que esté en el límite superior.
+     * @return La palabra del límite superior.
+     */
     public String getLimiteSuperior() {
         return limiteSuperior;
     }
 
+    /**
+     * Calcula el límite superior de la palabra y la regresa.
+     * @return Porcentaje de proximidad del límite superior.
+     */
     public double getProximidadSuperior() {
         return calcularProximidadLimite(limiteSuperior);
     }
 
+    /**
+     * Regresa la palabra que esté en el límite inferior.
+     * @return La palabra del límite inferior.
+     */
     public String getLimiteInferior() {
         return limiteInferior;
     }
 
+    /**
+     * Calcula el límite inferior de la palabra y la regresa.
+     * @return Porcentaje de proximidad del límite inferior.
+     */
     public double getProximidadInferior() {
         return calcularProximidadLimite(limiteInferior);
     }
 
+    /**
+     * Devuelve la palabra secreta.
+     * @return La palabra secreta de la ronda.
+     */
     public String getPalabraSecreta() {
         return palabraSecreta;
     }
 
+    /**
+     * Regresa la cantidad de intentos.
+     * @return Número de intentos que le quedan al jugador.
+     */
     public int getIntentosRestantes() {
         return intentosRestantes;
     }
 
+    /**
+     * Regresa la longitud de la palabra.
+     * @return Longitud (en letras) de la palabra secreta.
+     */
     public int getLongitudPalabra() {
         return longitudPalabra;
     }
 
+    /**
+     * Evalúa la palabra ingresada por el usuario, actualizando los límites,
+     * además, guarda las letras utilizadas en un HashSet.
+     * @param intento Palabra ingresada por el jugador.
+     * @return "correcto" si coincide, "antes" si está después de la meta, o "despues" si está antes.
+     */
     public String procesarIntento(String intento) {
         // El intento actual se le resta 1.
         intentosRestantes--;
@@ -78,29 +133,25 @@ public class ProcesadorRonda {
         }
 
         String resultado;
-
         // Usar compareTo() compara caracter por caracter.
-        // Si es 0, son idénticas, si es positivo, la palabra secreta va después alfabéticamente.
         int intentoComparado = intento.compareTo(palabraSecreta);
 
+        // Si el intento es igual 0, entonces la palabra ingresada y la secreta son iguales.
         if (intentoComparado == 0) {
             resultado = "correcto";
         } else if (intentoComparado > 0) {
+            // Si el intento es alfabéticamente mayor, "resultado" será el nuevo rango inferior.
             resultado = "antes";
             limiteInferior = intento;
         } else {
+            // Si el intento es alfabéticamente menor, "resultado" será el nuevo rango superior.
             resultado = "despues";
             limiteSuperior = intento;
         }
 
-        double proximidad = calcularProximidad(intento);
         historialIntentos.add(intento);
 
         return resultado;
-    }
-
-    public double calcularProximidad(String intento) {
-        return calcularProximidadLimite(intento);
     }
 
     /**
@@ -157,18 +208,36 @@ public class ProcesadorRonda {
         return Math.round(distanciaPorcentaje * 100.0) / 100.0;
     }
 
+    /**
+     * Verifica si un intento está dentro del rango válido actual (entre los límites).
+     * @param intento La palabra a verificar.
+     * @return true si está dentro del rango, false si está fuera.
+     */
     public boolean estaEnRango(String intento) {
+        // La palabra debe ser posterior al límite superior Y anterior al límite inferior.
         return intento.compareTo(limiteSuperior) > 0 && intento.compareTo(limiteInferior) < 0;
     }
 
+    /**
+     * Indica si al jugador le quedan intentos disponibles.
+     * @return true si aún tiene intentos, false si ya no tiene.
+     */
     public boolean tieneIntentos() {
         return intentosRestantes > 0;
     }
 
+    /**
+     * Indica si el jugador ya utilizó su pista en la ronda.
+     * @return true si la pista ya fue usada.
+     */
     public boolean pistaUtilizada() {
         return pistaUtilizada;
     }
 
+    /**
+     * Modifica el límite superior acercándolo un 1% hacia la palabra secreta.
+     * @return El nuevo límite superior asignado.
+     */
     public String recorrerPalabraArriba() {
         this.pistaUtilizada = true;
 
@@ -184,19 +253,28 @@ public class ProcesadorRonda {
 
         int distancia = indiceSecreto - indiceLimite;
 
+        // Se calcula cuántos elementos equivalen al 1% del tamaño total del diccionario.
         int pasos = Math.max(1, (int)(palabrasOrdenadas.size() * 0.01));
 
+        // Si el 1% de "pasos" se pasa de la palabra secreta, se ajusta
+        // para que quede exactamente una palabra antes del objetivo.
         if (pasos >= distancia) {
             pasos = Math.max(1, distancia - 1);
         }
 
         int nuevoIndice = indiceLimite + pasos;
+        // Obliga al índice nuevo a mantenerse en rangos válidos del arreglo.
         nuevoIndice = Math.max(0, Math.min(indiceSecreto, nuevoIndice));
 
+        // Entonces el nuevo límite superior será este nuevo índice tomado del cálculo.
         this.limiteSuperior = palabrasOrdenadas.get(nuevoIndice);
         return this.limiteSuperior;
     }
 
+    /**
+     * Modifica el límite inferior acercándolo un 1% hacia la palabra secreta.
+     * @return El nuevo límite inferior asignado.
+     */
     public String recorrerPalabraAbajo() {
         this.pistaUtilizada = true;
 
@@ -221,10 +299,15 @@ public class ProcesadorRonda {
         int nuevoIndice = indiceLimite - pasos;
         nuevoIndice = Math.max(indiceSecreto, Math.min(palabrasOrdenadas.size() - 1, nuevoIndice));
 
+        // El nuevo límite inferior será este nuevo índice tomado del cálculo.
         this.limiteInferior = palabrasOrdenadas.get(nuevoIndice);
         return this.limiteInferior;
     }
 
+    /**
+     * Pista que extrae el primer caracter de la palabra secreta.
+     * @return Caracter inicial en formato String.
+     */
     public String pistaLetraInicial() {
         pistaUtilizada = true;
         return String.valueOf(palabraSecreta.charAt(0));

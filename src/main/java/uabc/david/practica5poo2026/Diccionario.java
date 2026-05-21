@@ -5,16 +5,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+/**
+ * Esta clase representa el diccionario de palabras del juego Betweenle.
+ * Carga, almacena y consulta palabras desde un archivo de texto.
+ */
 public class Diccionario {
     private HashMap<String, Integer> palabras;
     private String rutaArchivo;
     private String idioma;
 
+    /**
+     * Crea un diccionario vacío para el idioma indicado.
+     * @param idioma El idioma del diccionario ("español" o "inglés").
+     */
     public Diccionario(String idioma) {
         this.idioma = idioma;
         this.palabras = new HashMap<>();
     }
 
+    /**
+     * Regresa el idioma asociado a un diccionario.
+     * @return El idioma del diccionario.
+     */
     public String getIdioma() {
         return idioma;
     }
@@ -50,16 +62,29 @@ public class Diccionario {
         }
     }
 
+    /**
+     * Verifica si una palabra existe en el diccionario.
+     * @param palabra La palabra a buscar.
+     * @return true si la palabra existe, false en caso contrario.
+     */
     public boolean existeLaPalabra(String palabra) {
         return palabras.containsKey(palabra.toLowerCase());
     }
 
+    /**
+     * Agrega una nueva palabra al diccionario.
+     * Esto permite que el jugador agregue palabras que considere válidas.
+     * @param palabra La palabra a agregar.
+     */
     public void agregarPalabra(String palabra) {
+        // Hace que la palabra ingresada se haga minúscula y elimina espacios vacíos.
         String palabraAgregada = palabra.toLowerCase().trim();
         palabras.put(palabraAgregada, palabraAgregada.length());
 
+        // Si se conoce la ruta del archivo, se escribe la nueva palabra al final del mismo.
         if (this.rutaArchivo != null) {
             try {
+                // El "true" dentro de FileWriter indica modo "append" (evita sobreescribir líneas).
                 BufferedWriter escritor = new BufferedWriter(new FileWriter(this.rutaArchivo, true));
                 escritor.newLine();
                 escritor.write(palabraAgregada);
