@@ -102,7 +102,7 @@ public class Betweenle {
             return "fuera de rango";
         }
 
-        String resultado = rondaActual.procesarIntento(palabraIngresada);
+        String resultado = rondaActual.realizarIntento(palabraIngresada);
 
         if (resultado.equals("correcto") || !rondaActual.tieneIntentos()) {
             partidaActiva = false;

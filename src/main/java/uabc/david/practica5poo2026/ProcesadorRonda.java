@@ -120,7 +120,7 @@ public class ProcesadorRonda {
      * @param intento Palabra ingresada por el jugador.
      * @return "correcto" si coincide, "antes" si está después de la meta, o "despues" si está antes.
      */
-    public String procesarIntento(String intento) {
+    public String realizarIntento(String intento) {
         // El intento actual se le resta 1.
         intentosRestantes--;
 
