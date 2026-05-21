@@ -321,4 +321,16 @@ public class ProcesadorRonda {
         return String.valueOf(palabraSecreta.charAt(0));
     }
 
+    /**
+     * Agrega una palabra recién validada a la lista de juego de la ronda actual
+     * y mantiene el orden alfabético estricto para no romper la búsqueda binaria.
+     * @param palabra La palabra nueva a incorporar.
+     */
+    public void agregarPalabraEnRonda(String palabra) {
+        // Agregamos la palabra a la lista de términos de esta longitud.
+        this.palabrasOrdenadas.add(palabra.toLowerCase().trim());
+        // Vuelve a ordenar la lista alfabéticamente al instante.
+        Collections.sort(this.palabrasOrdenadas);
+    }
+
 }

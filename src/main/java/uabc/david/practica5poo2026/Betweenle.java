@@ -174,11 +174,17 @@ public class Betweenle {
     }
 
     /**
-     * Agrega una palabra nueva al diccionario y al archivo de texto.
+     * Agrega una palabra nueva al diccionario, al archivo de texto y la ingresa
+     * dinámicamente en la ronda en curso posicionándola alfabéticamente.
      * @param palabra La palabra a agregar.
      */
     public void agregarPalabraAlDiccionario(String palabra) {
         diccionario.agregarPalabra(palabra);
+
+        // Si hay una ronda activa, se agrega la palabra en la lista local.
+        if (rondaActual != null) {
+            rondaActual.agregarPalabraEnRonda(palabra);
+        }
     }
 
     /**
