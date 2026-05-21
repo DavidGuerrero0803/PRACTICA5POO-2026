@@ -4,21 +4,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Esta clase representa la interfaz de usuario en consola para el juego Betweenle.
+ * Muestra menús, lee entradas y presenta los resultados.
+ */
 public class BetweenleUI {
     private Betweenle juego;
     private Scanner scanner;
 
+    /**
+     * Inicializa la interfaz con un scanner para leer desde consola,
+     * configura el juego con 7 letras por defecto para el modo difícil.
+     */
     public BetweenleUI() {
         this.scanner = new Scanner(System.in);
         this.juego = new Betweenle(7);
     }
 
+    /**
+     * Muestra el menú de configuración,
+     * ejecuta la partida y cierra el scanner al terminar.
+     */
     public void iniciar() {
         mostrarMenu();
         ejecutarPartida();
         scanner.close();
     }
 
+    /**
+     * Muestra el menú de configuración inicial y arranca la partida.
+     * El jugador elige el idioma del diccionario, la dificultad y el número de intentos.
+     */
     private void mostrarMenu() {
         System.out.println("\nSelecciona el idioma del diccionario:");
         System.out.println("1. Español");
@@ -38,8 +54,10 @@ public class BetweenleUI {
         } else if (opcionDificultad == 2) {
             dificultad = "intermedio";
         } else {
+            // En difícil, el jugador puede elegir la longitud de la palabra.
             dificultad = "dificil";
             int letras = leerOpcion("Ingresa el número de letras para el modo difícil: ", 7, 15);
+            // Se crea entonces el juego con la longitud elegida.
             juego = new Betweenle(letras);
         }
 
@@ -63,6 +81,7 @@ public class BetweenleUI {
 
         boolean iniciado = juego.iniciarPartida(idioma, dificultad, intentosElegidos);
 
+        // Si no hay palabras con la longitud requerida, se vuelve a mostrar el menú.
         if (!iniciado) {
             System.out.println("No se encontraron palabras de esa longitud en el diccionario.");
             mostrarMenu();
@@ -76,6 +95,13 @@ public class BetweenleUI {
                 " letras, tienes " + intentosElegidos + " intentos disponibles.");
     }
 
+    /**
+     * Lee un número entero ingresado por el jugador dentro de un rango válido.
+     * @param mensaje Texto que se muestra al jugador antes de leer.
+     * @param opc1 Valor mínimo aceptable.
+     * @param opcAlt Valor máximo aceptable.
+     * @return El número válido ingresado por el jugador.
+     */
     private int leerOpcion(String mensaje, int opc1, int opcAlt) {
         int opcion = 0;
         boolean valido = false;
@@ -98,12 +124,17 @@ public class BetweenleUI {
         return opcion;
     }
 
+    /**
+     * Ejecuta el bucle principal de la partida hasta que el jugador gane, pierda o se quede sin intentos.
+     */
     private void ejecutarPartida() {
         int numeroIntento = 1;
         boolean esGanador = false;
 
+        // El juego continúa mientras haya intentos y la partida esté activa.
         while (juego.juegoActivo()) {
             System.out.println("\n-----------------------------------------");
+            // Aquí se muestran los límites, proximidad e intentos restantes.
             System.out.println(juego.getEstado());
             System.out.println("-----------------------------------------");
 
@@ -115,6 +146,7 @@ public class BetweenleUI {
             System.out.println("[2] Pedir pista");
             int accion = leerOpcion("Elige una opción: ", 1, 2);
 
+            // Si el jugador pide su pista, se gestiona aparte y se regresa al inicio del turno.
             if (accion == 2) {
                 gestionarPista();
                 continue;
@@ -123,17 +155,20 @@ public class BetweenleUI {
             String intento = leerEntrada("Escribe una palabra: ");
             String resultado = juego.procesarIntento(intento);
 
+            // Si la palabra ingresada tiene otra longitud, avisará al usuario.
             if (resultado.equals("longitud")) {
                 System.out.println("\nLa palabra debe tener " +
                         juego.getRondaActual().getLongitudPalabra() + " letras. Intenta de nuevo.");
                 continue;
             }
 
+            // Si no existe la palabra ingresada, se da la opción de agregarla.
             if (resultado.equals("no encontrada")) {
                 manejarPalabraInexistente(intento);
                 continue;
             }
 
+            // Si la palabra está fuera de los límites, avisará al usuario al respecto.
             if (resultado.equals("fuera de rango")) {
                 System.out.println("\nLa palabra " + intento.toUpperCase()
                         + " está fuera del rango válido.");
@@ -145,16 +180,19 @@ public class BetweenleUI {
                 continue;
             }
 
+            // Si ya no quedan intentos, avisará al jugador.
             if (resultado.equals("sin intentos")) {
                 System.out.println("No te quedan intentos disponibles.");
                 break;
             }
 
+            // Si el jugador acertó, se mostrará un mensaje de victoria.
             if (resultado.equals("correcto")) {
                 esGanador = true;
                 break;
             }
 
+            // Si no acertó, pero está en los límites, se indica la dirección alfabética de la palabra secreta.
             if (resultado.equals("antes")) {
                 System.out.println("\nLa palabra secreta está ANTES de " + intento.toUpperCase() + " alfabéticamente.");
             } else if (resultado.equals("despues")) {
@@ -164,6 +202,7 @@ public class BetweenleUI {
             numeroIntento++;
         }
 
+        // Al finalizar la partida, se muestra el resumen completo.
         System.out.println("\n---------------------------------------------------");
         System.out.println("               RESUMEN DE LA PARTIDA               ");
         System.out.println("---------------------------------------------------");
@@ -181,11 +220,20 @@ public class BetweenleUI {
         }
     }
 
+    /**
+     * Lee una línea de texto ingresada por el jugador desde la consola.
+     * @param mensaje Texto que se muestra antes de leer.
+     * @return La entrada del jugador.
+     */
     private String leerEntrada(String mensaje) {
         System.out.print(mensaje);
         return scanner.nextLine().trim().toLowerCase();
     }
 
+    /**
+     * Muestra el historial de palabras de la partida.
+     * @param intentosTotales Número total de intentos hasta el momento.
+     */
     private void mostrarHistorial(int intentosTotales) {
         ArrayList<String> historial = juego.getHistorial();
         if (historial.isEmpty()) {
@@ -201,9 +249,15 @@ public class BetweenleUI {
         }
     }
 
+    /**
+     * Muestra todas las letras que el jugador ha utilizado hasta el momento.
+     * Usa un para recorrer el HashSet de letras usadas.
+     * Si aún no se ha intentado ninguna palabra, no muestra nada.
+     */
     private void mostrarLetrasUsadas() {
         Iterator<String> iterador = juego.getRondaActual().getLetrasUsadas().iterator();
 
+        // Si el HashSet está vacío, no hay nada que mostrar.
         if (!iterador.hasNext()) {
             return;
         }
@@ -215,7 +269,12 @@ public class BetweenleUI {
         System.out.println();
     }
 
+    /**
+     * Gestiona la pista solicitada por el jugador.
+     * Verifica primero si la pista ya fue usada y luego presenta las opciones disponibles.
+     */
     private void gestionarPista() {
+        // Si se usó la pista, ya no se mostrarán las opciones.
         if (juego.getRondaActual().pistaUtilizada()) {
             System.out.println("Ya usaste tu pista en esta partida.");
             return;
@@ -229,6 +288,7 @@ public class BetweenleUI {
 
         String resultadoPista = juego.pedirPista(opcionPista);
 
+        // Se valida que las pistas 1 y 2 requieren al menos un intento previo.
         if (resultadoPista.equals("requiere intento")) {
             System.out.println("\nNo puedes usar esta pista.");
             System.out.println("Ingresa al menos una palabra para establecer los límites iniciales.");
@@ -238,6 +298,11 @@ public class BetweenleUI {
         System.out.println("\nPista: " + resultadoPista);
     }
 
+    /**
+     * Maneja el caso en que el jugador intenta una palabra que no está en el diccionario.
+     * Se ofrece la posibilidad de agregarla si considera que es una palabra válida.
+     * @param palabra La palabra que no encontrada en el diccionario.
+     */
     private void manejarPalabraInexistente(String palabra) {
         System.out.println("\nLa palabra " + palabra + " no está en el diccionario.");
         System.out.println("¿Puedes demostrar que es una palabra válida?");
@@ -245,12 +310,16 @@ public class BetweenleUI {
         System.out.println("2. No, escribir otra palabra");
         int opcion = leerOpcion("Elige una opción: ", 1, 2);
 
+        // Si el jugador confirma, se agrega al diccionario correspondiente.
         if (opcion == 1) {
             juego.agregarPalabraAlDiccionario(palabra);
             System.out.println("La palabra " + palabra + " fue agregada al diccionario.");
         }
     }
 
+    /**
+     * Crea la interfaz e inicia con el juego.
+     */
     public static void main(String[] args) {
         BetweenleUI ui = new BetweenleUI();
         ui.iniciar();
