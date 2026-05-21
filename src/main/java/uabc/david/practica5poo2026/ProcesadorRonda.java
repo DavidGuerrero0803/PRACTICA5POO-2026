@@ -66,13 +66,21 @@ public class ProcesadorRonda {
     }
 
     public String procesarIntento(String intento) {
+        // El intento actual se le resta 1.
         intentosRestantes--;
 
+        // Dentro del ciclo, toma la palabra y su longitud
         for (int i = 0; i < intento.length(); i++) {
+            // Posteriormente, descompone la palabra en caracteres individuales.
+            // Estos caracteres se añaden al HashSet que los guarda,
+            // evitando duplicaciones posteriores de letras iguales.
             letrasUsadas.add(String.valueOf(intento.charAt(i)));
         }
 
         String resultado;
+
+        // Usar compareTo() compara caracter por caracter.
+        // Si es 0, son idénticas, si es positivo, la palabra secreta va después alfabéticamente.
         int intentoComparado = intento.compareTo(palabraSecreta);
 
         if (intentoComparado == 0) {
@@ -86,7 +94,7 @@ public class ProcesadorRonda {
         }
 
         double proximidad = calcularProximidad(intento);
-        historialIntentos.add(intento + "|" + resultado + "|" + proximidad);
+        historialIntentos.add(intento);
 
         return resultado;
     }
@@ -95,27 +103,48 @@ public class ProcesadorRonda {
         return calcularProximidadLimite(intento);
     }
 
+    /**
+     * Calcula el porcentaje de distancia alfabética entre un límite y la palabra secreta,
+     * basándose en sus índices dentro del diccionario filtrado.
+     * @param limite Palabra que marca el límite actual evaluado.
+     * @return Porcentaje decimal de distancia (0.00 a 100.0).
+     */
     public double calcularProximidadLimite(String limite) {
+        // Si el diccionario llegase a estar vacío o con una sola palabra,
+        // retorna automáticamente 0.01 para evitar excepciones.
         int totalPalabras = palabrasOrdenadas.size();
         if (totalPalabras <= 1) {
             return 0.01;
         }
 
-        // Se buscan las posiciones alfabéticas reales en el diccionario.
+        // Se usa binarySearch() ya que palabrasOrdenadas está ordenado de antes,
+        // y en vez de recorrer el ArrayList de inicio a fin, inspecciona el centro y divide la lista a la mitad.
         int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());
         int indiceLimite = Collections.binarySearch(palabrasOrdenadas, limite.toLowerCase());
 
+
+        // Se maneja un caso si la palabra secreta/límite no existe,
+        // binarySearch() regresa un número negativo.
         if (indiceSecreto < 0) {
+            // Se pasa el número negativo en el índice a un entero positivo,
+            // dicho índice le correspondería ocupar en la ordenación alfabética.
             indiceSecreto = -(indiceSecreto + 1);
         }
         if (indiceLimite < 0) {
             indiceLimite = -(indiceLimite + 1);
         }
 
-        // Distancia en cantidad de palabras reales,
+        // Uso de Math.abs() para calcula el valor absoluto.
+        // No importa si el límite está a la izquierda o a la derecha de la palabra secreta.
+        // Es para saber la cantidad de palabras que las separan en el diccionario.
         double distanciaIndices = Math.abs(indiceLimite - indiceSecreto);
+
+        // Este cálculo permite conocer qué tan lejos está un rango
+        // en términos porcentuales basados en la lista de palabras.
         double distanciaPorcentaje = (distanciaIndices / totalPalabras) * 100.0;
 
+        // La condición permite que el valor de la aproximación
+        // no se acorte ni se alargue de más.
          if (distanciaPorcentaje < 0.001) {
             return 0.001;
         }
@@ -123,6 +152,8 @@ public class ProcesadorRonda {
             return 100.0;
         }
 
+        // La distancia calculada se multiplica por 100, después
+        // se redondea a un valor entero y luego se divide entre 100.
         return Math.round(distanciaPorcentaje * 100.0) / 100.0;
     }
 
