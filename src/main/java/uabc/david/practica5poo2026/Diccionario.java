@@ -2,6 +2,7 @@ package uabc.david.practica5poo2026;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -81,13 +82,33 @@ public class Diccionario {
         String palabraAgregada = palabra.toLowerCase().trim();
         palabras.put(palabraAgregada, palabraAgregada.length());
 
-        // Si se conoce la ruta del archivo, se escribe la nueva palabra al final del mismo.
+        // Si se conoce la ruta del archivo, se reescribe completo en orden alfabético.
         if (this.rutaArchivo != null) {
             try {
-                // El "true" dentro de FileWriter indica modo "append" (evita sobreescribir líneas).
-                BufferedWriter escritor = new BufferedWriter(new FileWriter(this.rutaArchivo, true));
-                escritor.newLine();
-                escritor.write(palabraAgregada);
+                // Se leen todas las líneas actuales del archivo en una lista.
+                ArrayList<String> lineas = new ArrayList<>();
+                BufferedReader lector = new BufferedReader(new FileReader(this.rutaArchivo));
+                String linea;
+                while ((linea = lector.readLine()) != null) {
+                    String lineaNormalizada = linea.trim().toLowerCase();
+                    if (!lineaNormalizada.isEmpty()) {
+                        lineas.add(lineaNormalizada);
+                    }
+                }
+                lector.close();
+
+                // Se agrega la nueva palabra y se ordena toda la lista alfabéticamente.
+                lineas.add(palabraAgregada);
+                Collections.sort(lineas);
+
+                // Se sobreescribe el archivo completo con la lista ya ordenada.
+                BufferedWriter escritor = new BufferedWriter(new FileWriter(this.rutaArchivo));
+                for (int i = 0; i < lineas.size(); i++) {
+                    escritor.write(lineas.get(i));
+                    if (i < lineas.size() - 1) {
+                        escritor.newLine();
+                    }
+                }
                 escritor.close();
             } catch (IOException e) {
                 System.out.println("Error al intentar escribir en el archivo: " + e.getMessage());
