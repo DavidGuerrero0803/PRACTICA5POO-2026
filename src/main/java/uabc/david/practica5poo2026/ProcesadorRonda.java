@@ -239,6 +239,10 @@ public class ProcesadorRonda {
      * @return El nuevo límite superior asignado.
      */
     public String recorrerPalabraArriba() {
+        if (calcularProximidadLimite(limiteSuperior) <= 1.00) {
+            return "demasiado cerca";
+        }
+
         this.pistaUtilizada = true;
 
         int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());
@@ -276,6 +280,10 @@ public class ProcesadorRonda {
      * @return El nuevo límite inferior asignado.
      */
     public String recorrerPalabraAbajo() {
+        if (calcularProximidadLimite(limiteInferior) <= 1.00) {
+            return "demasiado cerca";
+        }
+
         this.pistaUtilizada = true;
 
         int indiceSecreto = Collections.binarySearch(palabrasOrdenadas, palabraSecreta.toLowerCase());

@@ -74,7 +74,6 @@ acknowledge
 acknowledged
 acm
 acne
-acorn
 acoustic
 acquire
 acquired
@@ -1313,7 +1312,6 @@ causes
 causing
 caution
 cave
-caves
 cayman
 cb
 cbs
@@ -1421,10 +1419,8 @@ chart
 charter
 charts
 chase
-chasm
 chassis
 chat
-chats
 cheap
 cheaper
 cheapest
@@ -1594,7 +1590,6 @@ clothing
 cloud
 clouds
 cloudy
-clown
 club
 clubs
 cluster
@@ -2060,7 +2055,6 @@ cox
 cp
 cpu
 cr
-crack
 cradle
 craft
 crafts
@@ -2068,7 +2062,6 @@ craig
 crap
 craps
 crash
-crate
 crawford
 crazy
 cream
@@ -2100,7 +2093,6 @@ criticism
 critics
 crm
 croatia
-crock
 crop
 crops
 cross
@@ -2695,7 +2687,6 @@ dubai
 dublin
 duck
 dude
-dudes
 due
 dui
 duke
@@ -3726,7 +3717,6 @@ go
 goal
 goals
 goat
-goats
 god
 gods
 goes
@@ -4021,7 +4011,6 @@ highlighted
 highlights
 highly
 highs
-hight
 highway
 highways
 hiking
@@ -4688,7 +4677,6 @@ killer
 killing
 kills
 kilometers
-kilos
 kim
 kinase
 kind
@@ -5936,7 +5924,6 @@ opposed
 opposite
 opposition
 opt
-optic
 optical
 optics
 optimal
@@ -7216,7 +7203,6 @@ restricted
 restriction
 restrictions
 restructuring
-rests
 result
 resulted
 resulting
@@ -7310,7 +7296,6 @@ rna
 ro
 road
 roads
-roast
 rob
 robbie
 robert
@@ -9554,3 +9539,18 @@ zope
 zu
 zum
 zus
+caves
+crate
+chats
+chasm
+crack
+roast
+optic
+hight
+goats
+acorn
+kilos
+
+dudes
+clown
+crock

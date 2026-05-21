@@ -210,12 +210,18 @@ public class Betweenle {
         // Pista encargada de mover el límite superior un 1%.
         if (opcionPista == 1) {
             String nuevoLimite = rondaActual.recorrerPalabraArriba();
+            if (nuevoLimite.equals("demasiado cerca")) {
+                return "demasiado cerca";
+            }
             return "El límite superior ahora es: " + nuevoLimite.toUpperCase();
         }
 
         // Pista encargada de mover el límite inferior un 1%.
         if (opcionPista == 2) {
             String nuevoLimite = rondaActual.recorrerPalabraAbajo();
+            if (nuevoLimite.equals("demasiado cerca")) {
+                return "demasiado cerca";
+            }
             return "El límite inferior ahora es: " + nuevoLimite.toUpperCase();
         }
 

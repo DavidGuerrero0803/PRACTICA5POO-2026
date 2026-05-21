@@ -276,7 +276,7 @@ public class BetweenleUI {
     private void gestionarPista() {
         // Si se usó la pista, ya no se mostrarán las opciones.
         if (juego.getRondaActual().pistaUtilizada()) {
-            System.out.println("Ya usaste tu pista en esta partida.");
+            System.out.println("\nYa usaste tu pista en esta partida.");
             return;
         }
 
@@ -292,6 +292,11 @@ public class BetweenleUI {
         if (resultadoPista.equals("requiere intento")) {
             System.out.println("\nNo puedes usar esta pista.");
             System.out.println("Ingresa al menos una palabra para establecer los límites iniciales.");
+            return;
+        }
+
+        if (resultadoPista.equals("demasiado cerca")) {
+            System.out.println("\nNo puedes usar ya esta pista, Estás a 1.00 de proximidad.");
             return;
         }
 
