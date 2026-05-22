@@ -168,15 +168,22 @@ public class BetweenleUI {
                 continue;
             }
 
-            // Si la palabra está fuera de los límites, avisará al usuario al respecto.
+            // Si la palabra está fuera de los límites, avisará al usuario cuál límite se pasó.
             if (resultado.equals("fuera de rango")) {
-                System.out.println("\nLa palabra " + intento.toUpperCase()
-                        + " está fuera del rango válido.");
-                System.out.println("Ingresa una palabra que esté alfabéticamente entre ["
-                        + juego.getRondaActual().getLimiteSuperior().toUpperCase()
-                        + "] y ["
-                        + juego.getRondaActual().getLimiteInferior().toUpperCase()
-                        + "].");
+                String limSuperior = juego.getRondaActual().getLimiteSuperior().toUpperCase();
+                String limInferior = juego.getRondaActual().getLimiteInferior().toUpperCase();
+                String intentoMayus = intento.toUpperCase();
+
+                System.out.println("\nLa palabra " + intentoMayus + " está fuera del rango válido.");
+
+                // Si intento es <= que el límite superior, significa que se desvió hacia arriba.
+                if (intento.toLowerCase().compareTo(limSuperior.toLowerCase()) <= 0) {
+                    System.out.println("Debe ser una palabra alfabéticamente posterior a " + limSuperior + ".");
+                }
+                // Si no, significa que es >= que el límite inferior.
+                else {
+                    System.out.println("Debe ser una palabra alfabéticamente anterior a " + limInferior + ".");
+                }
                 continue;
             }
 
@@ -296,7 +303,7 @@ public class BetweenleUI {
         }
 
         if (resultadoPista.equals("demasiado cerca")) {
-            System.out.println("\nNo puedes usar ya esta pista, Estás a 1.00 de proximidad.");
+            System.out.println("\nNo puedes usar ya esta pista, estás muy cerca.");
             return;
         }
 
