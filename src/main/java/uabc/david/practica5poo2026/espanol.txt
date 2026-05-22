@@ -181,7 +181,6 @@ adecuado
 adelantado
 adelante
 además
-además
 adentro
 adicción
 adicto
@@ -294,7 +293,6 @@ ahora
 ahorrar
 ahorros
 ahí
-ahí
 aire
 aires
 aislado
@@ -350,7 +348,6 @@ algunas
 alguno
 algunos
 algún
-algún
 ali
 aliado
 aliados
@@ -366,7 +363,6 @@ alimentos
 alivio
 alla
 allá
-allí
 allí
 alma
 almacén
@@ -452,7 +448,6 @@ amos
 amuleto
 amé
 amén
-américa
 américa
 analizar
 analítica
@@ -593,7 +588,6 @@ aquellas
 aquello
 aquellos
 aquél
-aquí
 aquí
 arabia
 araña
@@ -768,7 +762,6 @@ atardecer
 atascado
 ataúd
 atención
-atención
 atender
 atentamente
 atento
@@ -808,7 +801,6 @@ atrevas
 atreve
 atreves
 atrevido
-atrás
 atrás
 atún
 audición
@@ -870,7 +862,6 @@ avisarle
 avisaré
 avise
 aviso
-avión
 avión
 avísame
 ay
@@ -1027,7 +1018,6 @@ bebido
 bebiendo
 bebo
 bebé
-bebés
 bebés
 beca
 bella
@@ -1338,7 +1328,6 @@ campeonato
 campeones
 campesinos
 campeón
-campeón
 campo
 campos
 canadá
@@ -1352,7 +1341,6 @@ cancelar
 cancha
 canciller
 canciones
-canción
 canción
 candidato
 candidatos
@@ -2347,7 +2335,6 @@ cuidaré
 cuide
 cuiden
 cuido
-culos
 culpa
 culpable
 culpables
@@ -2403,7 +2390,6 @@ cállese
 cálmate
 cálmense
 cálmese
-cámara
 cámara
 cámaras
 cáncer
@@ -2483,11 +2469,8 @@ deberá
 deberán
 deberás
 debería
-debería
-deberíamos
 deberíamos
 deberían
-deberías
 deberías
 debes
 debido
@@ -2537,7 +2520,6 @@ declarado
 declarar
 declaro
 declaró
-decía
 decía
 decían
 decías
@@ -2774,7 +2756,6 @@ despierto
 despreciable
 desprecio
 después
-después
 destinado
 destino
 destrozado
@@ -2816,7 +2797,6 @@ determinar
 detesto
 detiene
 detonador
-detrás
 detrás
 detuvieron
 detuvo
@@ -2873,7 +2853,6 @@ diferentes
 dificultad
 dificultades
 difunto
-difícil
 difícil
 difíciles
 diga
@@ -3136,16 +3115,13 @@ déjate
 déjela
 déjelo
 déjeme
-déjeme
 déjenlo
-déjenme
 déjenme
 déjenos
 déme
 démosle
 dí
 día
-días
 días
 dígale
 dígales
@@ -3157,7 +3133,6 @@ dígaselo
 dímelo
 díselo
 dólar
-dólares
 dólares
 dónde
 e
@@ -3207,7 +3182,6 @@ ejecutivo
 ejemplo
 ejercicio
 ejercicios
-ejército
 ejército
 ejércitos
 el
@@ -3369,7 +3343,6 @@ encárgate
 enemigas
 enemigo
 enemigos
-energía
 energía
 enero
 enfadada
@@ -3719,7 +3692,6 @@ espérenme
 espía
 espías
 espíritu
-espíritu
 espíritus
 esqueleto
 esquina
@@ -3753,12 +3725,9 @@ estaras
 estaremos
 estarlo
 estará
-estará
 estarán
 estarás
 estaré
-estaré
-estaría
 estaría
 estaríamos
 estarían
@@ -3814,16 +3783,12 @@ estuviéramos
 estuvo
 está
 estábamos
-estábamos
 estáis
-están
 están
 estás
 esté
 estén
-estén
 estés
-estómago
 estómago
 estúpida
 estúpidas
@@ -3996,7 +3961,6 @@ fantasía
 fantasías
 fantástica
 fantástico
-fantástico
 fanático
 fanáticos
 faraón
@@ -4157,7 +4121,6 @@ frágil
 fría
 frías
 frío
-frío
 fu
 fue
 fuego
@@ -4212,7 +4175,6 @@ fuéramos
 fuí
 fábrica
 fácil
-fácil
 fáciles
 fácilmente
 fé
@@ -4223,7 +4185,6 @@ físicamente
 físico
 físicos
 fórmula
-fútbol
 fútbol
 gabinete
 gafas
@@ -4434,7 +4395,6 @@ gustar
 gustara
 gustará
 gustaría
-gustaría
 gustas
 guste
 gusten
@@ -4459,7 +4419,6 @@ habiendo
 habilidad
 habilidades
 habitaciones
-habitación
 habitación
 habitantes
 habitual
@@ -4504,11 +4463,8 @@ habrían
 habrías
 habéis
 había
-había
 habíamos
 habían
-habían
-habías
 habías
 hace
 hacemos
@@ -4557,9 +4513,6 @@ hambrientos
 hamburguesa
 hamburguesas
 han
-hanzo
-hara
-haras
 haremos
 harina
 harta
@@ -4568,7 +4521,6 @@ hará
 harán
 harás
 haré
-haría
 haría
 haríamos
 harían
@@ -4619,6 +4571,7 @@ hermosa
 hermosas
 hermoso
 hermosos
+heroe
 heroína
 herramienta
 herramientas
@@ -4741,7 +4694,6 @@ háblame
 hágalo
 háganlo
 héroe
-héroe
 héroes
 hígado
 húmedo
@@ -4766,7 +4718,6 @@ ignorancia
 ignorante
 ignorar
 igual
-igual
 iguales
 igualmente
 ilegal
@@ -4786,7 +4737,6 @@ imagine
 imagino
 imaginé
 imagínate
-imbécil
 imbécil
 imbéciles
 imitación
@@ -4840,7 +4790,6 @@ incluyendo
 incompetente
 inconsciente
 inconveniente
-increible
 increíble
 increíblemente
 increíbles
@@ -4876,7 +4825,6 @@ infinito
 influencia
 informa
 información
-información
 informado
 informante
 informar
@@ -4891,7 +4839,6 @@ ingenioso
 inglaterra
 inglesa
 ingleses
-inglés
 inglés
 ingresar
 ingreso
@@ -5517,7 +5464,6 @@ lárguense
 láser
 lástima
 líder
-líder
 líderes
 límite
 límites
@@ -5545,14 +5491,12 @@ magia
 magneto
 magnífica
 magnífico
-magnífico
 mago
 majestad
 mal
 mala
 malas
 maldad
-maldición
 maldición
 maldita
 malditas
@@ -5747,7 +5691,6 @@ mayor
 mayordomo
 mayores
 mayoría
-mayoría
 maíz
 mañana
 mañanas
@@ -5930,7 +5873,6 @@ misil
 misiles
 misiones
 misión
-misión
 misma
 mismas
 mismo
@@ -5994,7 +5936,6 @@ montaña
 montañas
 monte
 montones
-montón
 montón
 monumento
 moral
@@ -6073,6 +6014,7 @@ mudarse
 mudo
 mudó
 muebles
+muela
 muelle
 muera
 mueran
@@ -6115,7 +6057,6 @@ muriendo
 muriera
 murieron
 murió
-murió
 muro
 muros
 museo
@@ -6140,7 +6081,6 @@ máquina
 máquinas
 márchate
 más
-más
 máscara
 máscaras
 mátala
@@ -6152,7 +6092,6 @@ mátenlos
 máxima
 máximo
 médica
-médico
 médico
 médicos
 mérito
@@ -6276,7 +6215,6 @@ nietos
 nieve
 ninguna
 ninguno
-ningún
 ningún
 ninja
 nivel
@@ -6594,7 +6532,6 @@ oírlo
 oírme
 oírte
 oíste
-oíste
 pa
 pabellón
 paces
@@ -6794,7 +6731,6 @@ payaso
 payasos
 paz
 país
-país
 países
 pañales
 pañuelo
@@ -6857,7 +6793,6 @@ pelotón
 peluca
 peludo
 película
-película
 películas
 pena
 penas
@@ -6883,7 +6818,6 @@ pensaste
 pensemos
 pensión
 pensábamos
-pensé
 pensé
 pensó
 pentágono
@@ -6927,7 +6861,6 @@ perdone
 perdonen
 perdono
 perdí
-perdón
 perdón
 perdóname
 perdóneme
@@ -7058,9 +6991,11 @@ pilotos
 pimienta
 pinta
 pintar
+pinto
 pintor
 pintura
 pinturas
+pintó
 pipa
 pirata
 piratas
@@ -7143,9 +7078,7 @@ podrás
 podré
 podría
 podríamos
-podríamos
 podrían
-podrías
 podrías
 podéis
 podía
@@ -7159,8 +7092,6 @@ poeta
 poli
 policial
 policía
-policía
-policías
 policías
 polis
 pollo
@@ -7234,7 +7165,6 @@ posible
 posiblemente
 posibles
 posiciones
-posición
 posición
 positiva
 positivo
@@ -7507,17 +7437,13 @@ pruebas
 pruebe
 pruébalo
 práctica
-práctica
 prácticamente
 prácticas
 práctico
 préstamo
 príncipe
-príncipe
-próxima
 próxima
 próximas
-próximo
 próximo
 próximos
 psicología
@@ -7592,7 +7518,6 @@ pásame
 pégale
 pégame
 pérdida
-pérdida
 pérdidas
 pésimo
 pídele
@@ -7606,7 +7531,6 @@ póquer
 pórtate
 pública
 públicas
-público
 público
 púdrete
 púrpura
@@ -7719,7 +7643,6 @@ quité
 quitó
 quiza
 quizá
-quizás
 quizás
 quién
 quiénes
@@ -8198,7 +8121,6 @@ rutina
 rápida
 rápidamente
 rápido
-rápido
 rápidos
 récord
 régimen
@@ -8291,7 +8213,6 @@ salieron
 salimos
 salir
 saliste
-salió
 salió
 salmón
 salsa
@@ -8508,7 +8429,6 @@ servirá
 serviría
 será
 serán
-serán
 serás
 seré
 sería
@@ -8617,8 +8537,6 @@ sitio
 sitios
 situaciones
 situación
-situación
-siéntate
 siéntate
 siéntense
 siéntese
@@ -8914,7 +8832,6 @@ taller
 talvez
 tamaño
 también
-también
 tampoco
 tan
 tango
@@ -8957,7 +8874,6 @@ telegrama
 televisión
 televisor
 teléfono
-teléfono
 teléfonos
 tema
 temas
@@ -8979,9 +8895,7 @@ temía
 ten
 tendremos
 tendrá
-tendrá
 tendrán
-tendrás
 tendrás
 tendré
 tendría
@@ -9012,8 +8926,6 @@ tentación
 tenéis
 tenés
 tenía
-tenía
-teníamos
 teníamos
 tenían
 tenías
@@ -9129,7 +9041,6 @@ toco
 tocó
 toda
 todas
-todavía
 todavía
 todo
 todopoderoso
@@ -9291,7 +9202,6 @@ trayectoria
 trayendo
 traía
 traído
-traído
 trece
 tregua
 treinta
@@ -9410,7 +9320,6 @@ universidad
 universitario
 universo
 unió
-unión
 unión
 uno
 unos
@@ -9804,8 +9713,6 @@ vía
 vías
 víbora
 víctima
-víctima
-víctimas
 víctimas
 víspera
 vístete

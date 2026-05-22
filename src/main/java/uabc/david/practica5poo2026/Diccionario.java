@@ -1,6 +1,7 @@
 package uabc.david.practica5poo2026;
 
 import java.io.*;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,14 +46,11 @@ public class Diccionario {
             String linea;
             // El bucle se ejecuta de manera secuencial leyendo línea por línea el archivo .txt.
             while ((linea = lector.readLine()) != null) {
-
-                // Se usa .trim() para eliminar caracteres invisibles.
-                // toLowerCase() se encarga de convertir las palabras a minúsculas.
-                String palabra = linea.trim().toLowerCase();
-                // Si la línea está vacía, se ignora.
-                if (!palabra.isEmpty()) {
-                    // En caso de haber información, se agrega la palabra (clave) y su longitud (valor).
-                    palabras.put(palabra, palabra.length());
+                String palabraOriginal = linea.trim().toLowerCase();
+                if (!palabraOriginal.isEmpty()) {
+                    if (palabraOriginal.equals(limpiarAcentos(palabraOriginal))) {
+                        palabras.put(palabraOriginal, palabraOriginal.length());
+                    }
                 }
             }
             // Se cierra el lector para evitar fugas en la memoria.
@@ -78,27 +76,30 @@ public class Diccionario {
      * @param palabra La palabra a agregar.
      */
     public void agregarPalabra(String palabra) {
-        // Hace que la palabra ingresada se haga minúscula y elimina espacios vacíos.
-        String palabraAgregada = limpiarAcentos(palabra);
-        palabras.put(palabraAgregada, palabraAgregada.length());
+        String palabraLimpia = limpiarAcentos(palabra);
+        palabras.put(palabraLimpia, palabraLimpia.length());
 
-        // Si se conoce la ruta del archivo, se reescribe completo en orden alfabético.
+        // Actualiza el archivo manteniendo la ortografía original de las demás.
         if (this.rutaArchivo != null) {
             try {
-                // Se leen todas las líneas actuales del archivo en una lista.
                 ArrayList<String> lineas = new ArrayList<>();
                 BufferedReader lector = new BufferedReader(new FileReader(this.rutaArchivo));
                 String linea;
+
                 while ((linea = lector.readLine()) != null) {
-                    String lineaNormalizada = linea.trim().toLowerCase();
-                    if (!lineaNormalizada.isEmpty()) {
-                        lineas.add(lineaNormalizada);
+                    String lineaOriginal = linea.trim().toLowerCase();
+                    // Almacena la línea del archivo.
+                    if (!lineaOriginal.isEmpty() && !lineas.contains(lineaOriginal)) {
+                        lineas.add(lineaOriginal);
                     }
                 }
                 lector.close();
 
-                // Se agrega la nueva palabra y se ordena toda la lista alfabéticamente.
-                lineas.add(palabraAgregada);
+                // Inserta la nueva palabra de forma plana (sin acento).
+                if (!lineas.contains(palabraLimpia)) {
+                    lineas.add(palabraLimpia);
+                }
+
                 Collections.sort(lineas);
 
                 // Se sobreescribe el archivo completo con la lista ya ordenada.
@@ -143,13 +144,15 @@ public class Diccionario {
         if (texto == null) {
             return "";
         }
-        return texto.toLowerCase().trim()
-                .replace('á', 'a')
-                .replace('é', 'e')
-                .replace('í', 'i')
-                .replace('ó', 'o')
-                .replace('ú', 'u')
-                .replace('ü', 'u');
+
+        String procesado = texto.toLowerCase().trim();
+        procesado = procesado.replace("ñ", "##n##");
+
+        procesado = Normalizer.normalize(procesado, Normalizer.Form.NFD);
+        procesado = procesado.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        procesado = procesado.replace("##n##", "ñ");
+
+        return procesado;
     }
 
 }
