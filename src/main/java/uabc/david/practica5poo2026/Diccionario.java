@@ -79,7 +79,7 @@ public class Diccionario {
      */
     public void agregarPalabra(String palabra) {
         // Hace que la palabra ingresada se haga minúscula y elimina espacios vacíos.
-        String palabraAgregada = palabra.toLowerCase().trim();
+        String palabraAgregada = limpiarAcentos(palabra);
         palabras.put(palabraAgregada, palabraAgregada.length());
 
         // Si se conoce la ruta del archivo, se reescribe completo en orden alfabético.
@@ -134,6 +134,22 @@ public class Diccionario {
                 .sorted()
                 // Se toman todas las palabras filtradas y se almacenan en un nuevo ArrayList.
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Quita los acentos de una cadena de texto, convirtiéndolo a caracteres estándar.
+     */
+    public static String limpiarAcentos(String texto) {
+        if (texto == null) {
+            return "";
+        }
+        return texto.toLowerCase().trim()
+                .replace('á', 'a')
+                .replace('é', 'e')
+                .replace('í', 'i')
+                .replace('ó', 'o')
+                .replace('ú', 'u')
+                .replace('ü', 'u');
     }
 
 }

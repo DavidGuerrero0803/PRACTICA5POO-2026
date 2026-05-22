@@ -140,7 +140,7 @@ public class Betweenle {
      * @return Una cadena que describe el resultado.
      */
     public String procesarIntento(String intento) {
-        String palabraIngresada = intento.trim().toLowerCase();
+        String palabraIngresada = Diccionario.limpiarAcentos(intento);
 
         // Se valida si quedan intentos del jugador.
         if (!rondaActual.tieneIntentos()) {
